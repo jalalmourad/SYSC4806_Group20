@@ -28,6 +28,6 @@ nav ul li a:hover {
 }
 
 nav ul li a.active {
-    background-color: #4CAF50; /* Green background for the active link */
+    background-color: #4CAF50;
     font-weight: bold;
 }

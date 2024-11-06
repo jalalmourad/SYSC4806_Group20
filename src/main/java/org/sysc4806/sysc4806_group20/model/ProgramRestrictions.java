@@ -1,6 +1,6 @@
 package org.sysc4806.sysc4806_group20.model;
 
-public enum ProgramRestictions {
+public enum ProgramRestrictions {
     SOFTWARE_ENGINEERING,
     ELECTRICAL_ENGINEERING,
     AEROSPACE_ENGINEERING,

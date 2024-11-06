@@ -13,28 +13,29 @@ public class Topic {
     private String title;
     private String description;
 
+    @ElementCollection(targetClass = ProgramRestrictions.class)
     @Enumerated(EnumType.STRING)
-    private List<ProgramRestictions> programRestrictions;
+    private List<ProgramRestrictions> programRestrictions;
 
-    private int numberofStudents;
+    private int numberOfStudents;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ManyToOne
+    @OneToMany
     private List<Student> students;
 
-    @OneToMany
+    @ManyToOne
     private Prof prof;
 
     public Topic() {}
 
-    public Topic(String title, String description, List<ProgramRestictions> programRestrictions, int numberofStudents, Status status)
+    public Topic(String title, String description, List<ProgramRestrictions> programRestrictions, int numberofStudents, Status status)
     {
         this.title = title;
         this.description = description;
         this.programRestrictions = programRestrictions;
-        this.numberofStudents = numberofStudents;
+        this.numberOfStudents = numberofStudents;
         this.status = status;
     }
 
@@ -50,13 +51,13 @@ public class Topic {
     {
         return description;
     }
-    public List<ProgramRestictions> getProgramRestrictions()
+    public List<ProgramRestrictions> getProgramRestrictions()
     {
         return programRestrictions;
     }
-    public int getNumberofStudents()
+    public int getNumberOfStudents()
     {
-        return numberofStudents;
+        return numberOfStudents;
     }
     public Status getStatus()
     {
@@ -80,13 +81,13 @@ public class Topic {
     {
         this.description = description;
     }
-    public void setProgramRestrictions(List<ProgramRestictions> programRestrictions)
+    public void setProgramRestrictions(List<ProgramRestrictions> programRestrictions)
     {
         this.programRestrictions = programRestrictions;
     }
-    public void setNumberofStudents(int numberofStudents)
+    public void setNumberOfStudents(int numberOfStudents)
     {
-        this.numberofStudents = numberofStudents;
+        this.numberOfStudents = numberOfStudents;
     }
     public void setStatus(Status status)
     {

@@ -1,9 +1,9 @@
 package org.sysc4806.sysc4806_group20.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Professor {
@@ -11,6 +11,8 @@ public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @OneToMany
+    private List<Topic> topics;
     private String firstName;
     private String lastName;
 
@@ -20,6 +22,7 @@ public class Professor {
     public Professor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.topics = new ArrayList<>();
     }
 
     public void setId(long id) {
@@ -48,5 +51,16 @@ public class Professor {
 
     public String toString(){
         return "Prof Name: " + firstName + " " + lastName;
+    }
+
+    public void addTopic(Topic newTopic){
+        topics.add(newTopic);
+    }
+
+    public void removeTopic(Topic removeTopic){
+        topics.remove(removeTopic);
+    }
+    public List<Topic> getTopics(){
+        return topics;
     }
 }

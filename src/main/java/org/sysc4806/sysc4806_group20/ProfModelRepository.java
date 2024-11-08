@@ -4,8 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentModelRepository extends CrudRepository<StudentModel,Long> {
-
-    public StudentModel findStudentModelByStudentID(Long studentID);
-
+public interface ProfModelRepository extends CrudRepository<ProfModel, Long> {
+    public ProfModel findByName(String name);
 }

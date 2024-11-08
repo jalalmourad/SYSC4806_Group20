@@ -1,6 +1,8 @@
 package org.sysc4806.sysc4806_group20;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
@@ -11,17 +13,20 @@ public class StudentModel {
     private Long studentID;
 
     @Id
+    @GeneratedValue
     private Long id;
-
-    public StudentModel() {
-
-    }
 
     public StudentModel(String firstName, String lastName, Long studentID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.studentID = studentID;
     }
+
+    public StudentModel() {
+
+    }
+
+
 
     @Override
     public String toString() {

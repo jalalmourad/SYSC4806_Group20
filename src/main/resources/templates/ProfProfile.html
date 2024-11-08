@@ -48,13 +48,17 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">List of Topics</h5>
-            <div class="card mb-3" th:each="t : ${professor.topics}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${t.title}"></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-secondary" th:text="${t.status}"></span></h6>
-                    <p class="card-text" th:text="${t.description}"></p>
-                    <div th:each="p : ${t.programRestrictions}">
-                        <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col" th:each="t : ${professor.topics}">
+                    <div class="card mb-3" >
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${t.title}"></h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-secondary" th:text="${t.status}"></span></h6>
+                            <p class="card-text" th:text="${t.description}"></p>
+                            <div th:each="p : ${t.programRestrictions}">
+                                <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -51,7 +51,7 @@
             <label for="programrestrictions" class="form-label">Program Restrictions</label>
             <div th:each="p : ${programs}" class="form-check" id="programrestrictions">
                 <input th:value="${p}" th:id="'gridCheck_' + ${p}" class="form-check-input" type="checkbox">
-                <label th:for="'gridCheck_' + ${p}" th:text="${p}" class="form-check-label"></label>
+                <label th:for="'gridCheck_' + ${p}" th:text="|${p} Engineering|" class="form-check-label"></label>
             </div>
         </div>
         <div class="col-12">
@@ -60,4 +60,49 @@
     </form>
 </div>
 </body>
+<script th:inline="javascript">
+    let profId = [[${profId}]];
+</script>
+<script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // Gather data from form fields
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const status = document.getElementById("inputState").value;
+        const programRestrictions = Array.from(document.querySelectorAll("#programrestrictions input[type='checkbox']:checked"))
+            .map(checkbox => checkbox.value);
+
+        // Create the topic data object
+        const data = {
+            title: title,
+            description: description,
+            status: status,
+            programRestrictions: programRestrictions
+        };
+
+        // Send the AJAX POST request
+        fetch(`/api/topics/newTopic/${profId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to create topic");
+                return response.json();
+            })
+            .then(data => {
+                alert("Topic created successfully!");
+                console.log("Created Topic:", data);
+            })
+            .catch(error => {
+                alert("Error creating topic");
+                console.error("Error:", error);
+            });
+    });
+
+</script>
 </html>

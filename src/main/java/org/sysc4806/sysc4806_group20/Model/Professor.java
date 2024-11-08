@@ -10,19 +10,19 @@ public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @OneToMany
     private List<Topic> topics;
     private String firstName;
     private String lastName;
 
-    public Professor() {
-    }
-
     public Professor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.topics = new ArrayList<>();
+    }
+
+    public Professor() {
     }
 
     public void setId(long id) {

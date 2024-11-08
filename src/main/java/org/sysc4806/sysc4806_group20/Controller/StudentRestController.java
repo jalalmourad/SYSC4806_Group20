@@ -9,12 +9,12 @@ import org.sysc4806.sysc4806_group20.Model.Student;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
 
 @RestController
-@RequestMapping("/api/student")
+@RequestMapping("/api/students")
 public class StudentRestController {
     @Autowired
     private StudentService studentService;
     @PostMapping("/newStudent")
-    public Student newProfessor(@RequestParam(value = "firstName") String firstName,
+    public Student newStudent(@RequestParam(value = "firstName") String firstName,
                                   @RequestParam(value = "lastName") String lastName,
                                 @RequestParam(value = "studentId") Long studentId){
         Student newStud = new Student(firstName, lastName, studentId);

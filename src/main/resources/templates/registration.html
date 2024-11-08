@@ -10,6 +10,38 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/registration">Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container mt-5">
     <h2>Registration</h2>
     <div id="Alerts"></div>
@@ -88,19 +120,20 @@
             lastName: professorLastName
         };
 
-        fetch('/api/professors/newProfessor', {
+        const url = `/api/professors/newProfessor?firstName=${encodeURIComponent(professorFirstName)}&lastName=${encodeURIComponent(professorLastName)}`;
+
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            }
         })
             .then(response => response.json())
             .then(data => {
                 $("#Alerts").append("<div class=\"alert alert-success d-flex align-items-center\" id='alert-"+professorFirstName +"' role=\"alert\">\n" +
                     "  <i class=\"bi bi-check-circle-fill\" style='padding-right: 5px'></i>\n" +
                     "  <div>\n" +
-                    "    New User Created for " + professorFirstName + " \n"+
+                    "    New Professor User Created for " + professorFirstName + " \n"+
                     "  </div>\n" +
                     "</div>");
                 setTimeout(function() {
@@ -135,12 +168,14 @@
             studentId: studentNumber
         };
 
-        fetch('/api/student/newStudent', {
+        const url = `/api/students/newStudent?firstName=${encodeURIComponent(studentFirstName)}&lastName=${encodeURIComponent(studentLastName)}&studentId=${encodeURIComponent(studentNumber)}`;
+
+
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            }
         })
             .then(response => response.json())
             .then(data => {

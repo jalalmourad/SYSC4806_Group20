@@ -10,26 +10,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Home</a>
+        <a class="navbar-brand" href="/"><i class="bi bi-house" style="padding-right: 5px"></i>Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/registration">Registration</a>
+                    <a class="nav-link active" aria-current="page" href="/registration"><i class="bi bi-arrow-up-right-circle" style="padding-right: 5px"></i>Registration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">something</a>
+                    <a class="nav-link" aria-current="page" href="/listTopics"><i class="bi bi-card-list" style="padding-right: 5px"></i>List of Topics</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Prof
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Sign In</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <!--<li><hr class="dropdown-divider"></li>-->
+                        <li><a class="dropdown-item" href="#">Add Topic</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<br><br>
-<div class="container">
+<div class="container mt-5">
     <h1>Add New Topic</h1>
     <form class="row g-3">
         <div class="col-12">
@@ -95,11 +108,9 @@
                 return response.json();
             })
             .then(data => {
-                alert("Topic created successfully!");
                 console.log("Created Topic:", data);
             })
             .catch(error => {
-                alert("Error creating topic");
                 console.error("Error:", error);
             });
     });

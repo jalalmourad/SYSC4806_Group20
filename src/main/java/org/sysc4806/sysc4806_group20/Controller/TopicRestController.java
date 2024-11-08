@@ -20,8 +20,9 @@ public class TopicRestController {
     public Topic newTopic(@RequestBody Topic topicRequest, @PathVariable Long id){
         Professor profreturn = professorService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Professor not found with id " + id));
-        topicService.save(topicRequest);
         profreturn.addTopic(topicRequest);
+        topicRequest.setProf(profreturn);
+        topicService.save(topicRequest);
         professorService.save(profreturn);
         System.out.println("New Topic Created");
         return topicRequest;

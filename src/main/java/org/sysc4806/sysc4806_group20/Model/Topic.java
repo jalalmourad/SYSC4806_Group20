@@ -93,4 +93,10 @@ public class Topic {
     {
         this.status = status;
     }
+
+    public void setProf(Professor prof) {
+        this.prof = prof;
+    }
+
+
 }

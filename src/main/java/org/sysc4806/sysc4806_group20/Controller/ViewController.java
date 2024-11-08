@@ -13,6 +13,7 @@ import org.sysc4806.sysc4806_group20.Model.Status;
 import org.sysc4806.sysc4806_group20.Model.Student;
 import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
+import org.sysc4806.sysc4806_group20.Service.TopicService;
 
 import java.util.EnumSet;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class ViewController {
     private ProfessorService professorService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private TopicService topicService;
 
     @GetMapping("/")
     public String home(){
@@ -32,6 +35,15 @@ public class ViewController {
     @GetMapping("/registration")
     public String registration(){
         return "registration";
+    }
+
+    /**
+     * Testing
+     */
+    @GetMapping("/listTopics")
+    public String topicList(Model model){
+        model.addAttribute("topics", topicService.findAll());
+        return "topicList";
     }
 
     /**

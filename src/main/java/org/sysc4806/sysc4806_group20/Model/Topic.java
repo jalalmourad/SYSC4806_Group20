@@ -98,5 +98,17 @@ public class Topic {
         this.prof = prof;
     }
 
-
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", programRestrictions=" + programRestrictions +
+                ", numberOfStudents=" + numberOfStudents +
+                ", status=" + status +
+                ", students=" + students +
+                ", prof=" + prof +
+                '}';
+    }
 }

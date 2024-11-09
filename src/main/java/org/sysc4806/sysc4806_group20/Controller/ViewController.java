@@ -88,5 +88,10 @@ public class ViewController {
     }
 
 
+    @GetMapping("/listTopics/remove/{id}")
+    public String removeTopic(@PathVariable Long id) {
+        topicService.deleteById(id);
+        return "redirect:/listTopics";
+    }
 
 }

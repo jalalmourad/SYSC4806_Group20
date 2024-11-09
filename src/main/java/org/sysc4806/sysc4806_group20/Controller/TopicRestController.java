@@ -10,6 +10,8 @@ import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
 import org.sysc4806.sysc4806_group20.Service.TopicService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/topics")
 public class TopicRestController {
@@ -36,6 +38,7 @@ public class TopicRestController {
         return topicRequest;
     }
 
+
     @PostMapping("/addStudentToTopic")
     public Topic addStudentToTopic(@RequestParam Long topic, @RequestParam Long studentNum){
         System.out.println(topic+ " " + studentNum);
@@ -46,4 +49,5 @@ public class TopicRestController {
         topicService.save(topicToAddStudent);
         return topicToAddStudent;
     }
+
 }

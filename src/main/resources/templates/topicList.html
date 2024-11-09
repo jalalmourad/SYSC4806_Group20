@@ -62,7 +62,20 @@
                     <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                 </div>
             </td>
+
+            <td>
+                <a th:href="@{/listTopics/{id}(id=${t.id})}" style="text-decoration: none;">
+                    <button class="btn btn-primary">View Topic</button>
+                </a>
+
+                <a th:href="@{/listTopics/remove/{id}(id=${t.id})}" style="text-decoration: none;">
+                    <button class="btn btn-danger">Remove</button>
+                </a>
+
+            </td>
+
             <td th:text="${t.numberOfStudents}"></td>
+
         </tr>
         </tbody>
     </table>

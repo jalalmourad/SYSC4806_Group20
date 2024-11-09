@@ -6,16 +6,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.sysc4806.sysc4806_group20.Model.*;
+
 import org.sysc4806.sysc4806_group20.Model.Professor;
 import org.sysc4806.sysc4806_group20.Model.ProgramRestrictions;
 import org.sysc4806.sysc4806_group20.Model.Status;
 import org.sysc4806.sysc4806_group20.Model.Student;
+
 import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
 import org.sysc4806.sysc4806_group20.Service.TopicService;
 
 import java.util.EnumSet;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class ViewController {
@@ -86,4 +92,20 @@ public class ViewController {
         System.out.println(studentreturn);
         return "StudentProfile";
     }
+
+    @GetMapping("/listTopics/{id}")
+    public String getTopic(@PathVariable Long id, Model model) {
+        Topic topic = topicService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Topic not found with id " + id));
+        model.addAttribute("topicView", topic);
+        return "TopicView";
+    }
+
+
+    @GetMapping("/listTopics/remove/{id}")
+    public String removeTopic(@PathVariable Long id) {
+        topicService.deleteById(id);
+        return "redirect:/listTopics";
+    }
+
 }

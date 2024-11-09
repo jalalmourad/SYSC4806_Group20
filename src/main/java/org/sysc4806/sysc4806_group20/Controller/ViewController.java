@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.sysc4806.sysc4806_group20.Model.Professor;
 import org.sysc4806.sysc4806_group20.Model.ProgramRestrictions;
 import org.sysc4806.sysc4806_group20.Model.Status;
@@ -40,6 +39,13 @@ public class ViewController {
     /**
      * Testing
      */
+    @GetMapping("/{student_id}/listTopics")
+    public String registerStudentTopicList(@PathVariable Long student_id, Model model){
+        model.addAttribute("topics", topicService.findAll());
+        model.addAttribute("student_id", student_id);
+        return "topicListStudent";
+    }
+
     @GetMapping("/listTopics")
     public String topicList(Model model){
         model.addAttribute("topics", topicService.findAll());

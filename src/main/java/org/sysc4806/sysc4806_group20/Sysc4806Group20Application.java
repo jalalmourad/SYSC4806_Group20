@@ -20,6 +20,7 @@ public class Sysc4806Group20Application {
         SpringApplication.run(Sysc4806Group20Application.class, args);
     }
 
+
     @Bean
     @Transactional
     public CommandLineRunner demo(TopicRepository repository){		//WOAH DI!
@@ -35,5 +36,6 @@ public class Sysc4806Group20Application {
 
         };
     }
+
 
 }

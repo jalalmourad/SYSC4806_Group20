@@ -50,6 +50,7 @@
             <th>Supervisor</th>
             <th>Program Restrictions</th>
             <th>Num Students</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -62,23 +63,44 @@
                     <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                 </div>
             </td>
-
-            <td>
-                <a th:href="@{/listTopics/{id}(id=${t.id})}" style="text-decoration: none;">
-                    <button class="btn btn-primary">View Topic</button>
-                </a>
-
-                <a th:href="@{/listTopics/remove/{id}(id=${t.id})}" style="text-decoration: none;">
-                    <button class="btn btn-danger">Remove</button>
-                </a>
-
-            </td>
-
             <td th:text="${t.numberOfStudents}"></td>
-
+            <td>
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary join-button" th:value="${t.id}"> Join </button>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<script>
+    let studentNum = [[${student_id}]];
+    $(document).ready(function()
+    {
+        $(".join-button").on("click", function(){
+            const topic = $(this).val();
+            addStudent(topic)
+        })
+    })
+
+    function addStudent(topic) {
+        fetch(`/api/topics/addStudentToTopic?topic=${topic}&studentNum=${studentNum}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok){
+                alert('Student added');
+            } else {
+                alert("Failed to add student")
+            }
+        }).catch(error => {
+            alert(error + "Failed to add student");
+        });
+
+        console.log(studentNum);
+        console.log(topic);
+        console.log("YIPEEEE");
+    }
+</script>
 </body>
 </html>

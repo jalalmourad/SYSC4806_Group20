@@ -8,6 +8,8 @@ import org.sysc4806.sysc4806_group20.Model.Topic;
 import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 import org.sysc4806.sysc4806_group20.Service.TopicService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/topics")
 public class TopicRestController {
@@ -27,4 +29,5 @@ public class TopicRestController {
         System.out.println("New Topic Created");
         return topicRequest;
     }
+
 }

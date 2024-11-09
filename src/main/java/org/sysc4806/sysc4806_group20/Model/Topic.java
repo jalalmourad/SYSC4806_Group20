@@ -17,7 +17,7 @@ public class Topic {
     @Enumerated(EnumType.STRING)
     private List<ProgramRestrictions> programRestrictions;
 
-    private int numberOfStudents;
+    private int numberOfStudents = 0;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -96,6 +96,11 @@ public class Topic {
 
     public void setProf(Professor prof) {
         this.prof = prof;
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+        numberOfStudents++;
     }
 
     @Override

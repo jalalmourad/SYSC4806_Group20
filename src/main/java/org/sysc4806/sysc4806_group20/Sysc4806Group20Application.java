@@ -20,22 +20,4 @@ public class Sysc4806Group20Application {
         SpringApplication.run(Sysc4806Group20Application.class, args);
     }
 
-
-    @Bean
-    @Transactional
-    public CommandLineRunner demo(TopicRepository repository){		//WOAH DI!
-        return (args) -> {
-
-            Topic topic = new Topic("SLIME", "The engineering team developed an innovative solution to improve the efficiency of solar panels by integrating advanced materials and cutting-edge technology, aiming to reduce energy costs and enhance sustainability.", new ArrayList<ProgramRestrictions>(), 33, Status.DRAFT);
-            repository.save(topic);
-
-
-            repository.findAll().forEach(topicial -> {
-                System.out.println(topicial.getId());
-            });
-
-        };
-    }
-
-
 }

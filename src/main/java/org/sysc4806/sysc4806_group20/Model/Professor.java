@@ -16,15 +16,16 @@ public class Professor {
     private String firstName;
     private String lastName;
 
+    public Professor() {
+    }
+
     public Professor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.topics = new ArrayList<>();
     }
 
-    public Professor() {
-        this.topics = new ArrayList<>();
-    }
+
 
     public void setId(long id) {
         this.id = id;

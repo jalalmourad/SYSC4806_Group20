@@ -11,23 +11,26 @@ Jalal Mourad - 101195065
 ### UML Diagram
 ![UML Diagram](/README_imgs/Sysc4806Group20UML.png)
 
-### Database
+### Database Schema
+![UML Diagram](/README_imgs/Database_Schema.png)
 
 ## Log
-| Milestone    | 1   |
-|--------------|-----|
-| Sami Mnif    |     |
-| Hadi Srour   |     |
-| Jalal Mourad |     |
-|              |     |
-|              |     |
-|              |     |
+| Milestone     | 1   |
+|---------------|-----|
+| Sami Mnif     |     |
+| Hadi Srour    |     |
+| Jalal Mourad  |     |
+| Ibtasam Rasool|     |
+|               |     |
+|               |     |
 
 ## Updates
 ![Registration](/README_imgs/registration.png)
 ![New Topic Creation](/README_imgs/newTopic.png)
 ![Professor profile](/README_imgs/professorProfile.png)
 ![Topic List](/README_imgs/topicList.png)
+![Student Num](/README_imgs/ChangesForStudentNum.PNG)
+![Enroll Student](/README_imgs/ChangesForAddingStudent.PNG)
 
 ## Project Dir
 ```

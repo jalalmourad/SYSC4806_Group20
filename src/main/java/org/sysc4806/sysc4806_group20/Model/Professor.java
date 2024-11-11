@@ -23,6 +23,7 @@ public class Professor {
     }
 
     public Professor() {
+        this.topics = new ArrayList<>();
     }
 
     public void setId(long id) {

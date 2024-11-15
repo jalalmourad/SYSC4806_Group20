@@ -28,7 +28,11 @@
             </div>
             <div class="col">
                 <h3><span class="badge text-bg-info">Topic Status:</span></h3>
-                <p><span th:text="${topicView.status}"></span></p>
+                <h4>
+                    <span class="badge" th:text="${topicView.status}"
+                          th:classappend="${#strings.trim(topicView.status) == 'OPEN'} ? 'text-bg-success' : (${#strings.trim(topicView.status) == 'FULL'} ? 'text-bg-danger' : 'text-bg-secondary')">
+                    </span>
+                </h4>
             </div>
         </div>
         <div class="row">

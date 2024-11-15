@@ -52,7 +52,7 @@ public class Professor {
     }
 
     public String toString(){
-        return "Prof Name: " + firstName + " " + lastName;
+        return firstName + " " + lastName;
     }
 
     public void addTopic(Topic newTopic){

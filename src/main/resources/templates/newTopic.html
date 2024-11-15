@@ -86,7 +86,6 @@
         const status = document.getElementById("inputState").value;
         const programRestrictions = Array.from(document.querySelectorAll("#programrestrictions input[type='checkbox']:checked"))
             .map(checkbox => checkbox.value);
-
         // Create the topic data object
         const data = {
             title: title,
@@ -95,6 +94,7 @@
             programRestrictions: programRestrictions
         };
 
+        console.log(data);
         // Send the AJAX POST request
         fetch(`/api/topics/newTopic/${profId}`, {
             method: 'POST',

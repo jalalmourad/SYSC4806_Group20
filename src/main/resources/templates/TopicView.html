@@ -8,20 +8,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body class="bg-light py-4">
-
-<div class="container">
+<body class="bg-light">
+<div th:replace="common/navbar :: common-navbar" />
+<div class="container mt-5">
     <div class="card shadow-lg p-4 mb-4 rounded">
         <h2 class="text-center text-primary mb-3">
-            <u>Topic <span th:text="${topicView.id}"></span></u> :
+            <span class="badge text-bg-info">
+            <u>Topic ID <span th:text="${topicView.id}"></span></u>:
             <b><span th:text="${topicView.title}"></span></b>
+            </span>
         </h2>
         <p class="text-muted text-center mb-3">
             <span th:text="'Number of students: ' + ${topicView.numberOfStudents}"></span>
         </p>
-
-        <h3><mark>Description:</mark></h3>
-        <p><span th:text="${topicView.description}"></span></p>
+        <div class="row">
+            <div class="col">
+                <h3><span class="badge text-bg-info">Professor In Charge:</span></h3>
+                <p><span th:text="${topicView.prof}"></span></p>
+            </div>
+            <div class="col">
+                <h3><span class="badge text-bg-info">Topic Status:</span></h3>
+                <p><span th:text="${topicView.status}"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3><span class="badge text-bg-info">Description:</span></h3>
+                <p><span th:text="${topicView.description}"></span></p>
+            </div>
+           <div class="col">
+               <h3><span class="badge text-bg-info">Program Restrictions:</span></h3>
+               <div th:each="p : ${topicView.programRestrictions}">
+                   <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
+               </div>
+           </div>
+        </div>
     </div>
 </div>
 

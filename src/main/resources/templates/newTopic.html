@@ -10,39 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/"><i class="bi bi-house" style="padding-right: 5px"></i>Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/registration"><i class="bi bi-arrow-up-right-circle" style="padding-right: 5px"></i>Registration</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/listTopics"><i class="bi bi-card-list" style="padding-right: 5px"></i>List of Topics</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Prof
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sign In</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <!--<li><hr class="dropdown-divider"></li>-->
-                        <li><a class="dropdown-item" href="#">Add Topic</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="common/navbar :: common-navbar" />
 <div class="container mt-5">
+    <div id="Alerts"></div>
     <h1>Add New Topic</h1>
     <form class="row g-3">
         <div class="col-12">
@@ -52,6 +22,10 @@
         <div class="col-12">
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" id="description" placeholder="Topic Description" required></textarea>
+        </div>
+        <div class="col-md-4">
+            <label for="maxNumber" class="form-label">Max Number of Students</label>
+            <input type="number" class="form-control" id="maxNumber" placeholder="Max Number of Students" required>
         </div>
         <div class="col-md-4">
             <label for="inputState" class="form-label">Status</label>
@@ -84,17 +58,19 @@
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
         const status = document.getElementById("inputState").value;
+        const maxNum = document.getElementById("maxNumber").value;
         const programRestrictions = Array.from(document.querySelectorAll("#programrestrictions input[type='checkbox']:checked"))
             .map(checkbox => checkbox.value);
-
         // Create the topic data object
         const data = {
             title: title,
             description: description,
             status: status,
+            numberOfStudents: maxNum,
             programRestrictions: programRestrictions
         };
 
+        console.log(data);
         // Send the AJAX POST request
         fetch(`/api/topics/newTopic/${profId}`, {
             method: 'POST',
@@ -105,10 +81,20 @@
         })
             .then(response => {
                 if (!response.ok) throw new Error("Failed to create topic");
-                return response.json();
+                return response;
             })
             .then(data => {
                 console.log("Created Topic:", data);
+                document.querySelector("form").reset();
+                $("#Alerts").append("<div class=\"alert alert-success d-flex align-items-center\" id='alert-"+title +"' role=\"alert\">\n" +
+                    "  <i class=\"bi bi-check-circle-fill\" style='padding-right: 5px'></i>\n" +
+                    "  <div>\n" +
+                    "    New Topic got created successfully \n"+
+                    "  </div>\n" +
+                    "</div>");
+                setTimeout(function() {
+                    $('#alert-' + title).remove();
+                }, 15000);
             })
             .catch(error => {
                 console.error("Error:", error);

@@ -1,10 +1,7 @@
 package org.sysc4806.sysc4806_group20.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.sysc4806.sysc4806_group20.Model.Professor;
 import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 
@@ -20,5 +17,11 @@ public class ProfessorRestController {
         Professor newProf = new Professor(firstName, lastName);
         professorService.save(newProf);
         return newProf;
+    }
+
+    @DeleteMapping("/deleteProfessor")
+    public Long deleteProfessor(@RequestParam(value = "id") Long id){
+        professorService.deleteById(id);
+        return id;
     }
 }

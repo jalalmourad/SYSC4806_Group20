@@ -130,6 +130,7 @@
         })
             .then(response => response.json())
             .then(data => {
+                document.querySelectorAll("form").forEach(form => form.reset());
                 $("#Alerts").append("<div class=\"alert alert-success d-flex align-items-center\" id='alert-"+professorFirstName +"' role=\"alert\">\n" +
                     "  <i class=\"bi bi-check-circle-fill\" style='padding-right: 5px'></i>\n" +
                     "  <div>\n" +
@@ -179,6 +180,7 @@
         })
             .then(response => response.json())
             .then(data => {
+                document.querySelectorAll("form").forEach(form => form.reset());
                 $("#Alerts").append("<div class=\"alert alert-success d-flex align-items-center\" id='alert-"+studentFirstName +"' role=\"alert\">\n" +
                     "  <i class=\"bi bi-check-circle-fill\" style='padding-right: 5px'></i>\n" +
                     "  <div>\n" +

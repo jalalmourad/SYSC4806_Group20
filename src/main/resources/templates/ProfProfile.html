@@ -61,6 +61,9 @@
                                 <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                             </div>
                         </div>
+                        <form th:action="|/api/topics/deleteTopic/${t.id}|" method="DELETE">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>

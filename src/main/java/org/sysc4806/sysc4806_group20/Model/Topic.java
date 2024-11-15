@@ -27,7 +27,7 @@ public class Topic {
     @OneToMany
     private List<Student> students;
 
-    @ManyToOne
+    @OneToOne
     private Professor prof;
 
     public Topic() {}

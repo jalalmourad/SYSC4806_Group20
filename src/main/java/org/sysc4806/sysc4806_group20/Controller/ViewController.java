@@ -104,6 +104,7 @@ public class ViewController {
 
     @GetMapping("/listTopics/remove/{id}")
     public String removeTopic(@PathVariable Long id) {
+        System.out.println(id + "Remove this");
         topicService.deleteById(id);
         return "redirect:/listTopics";
     }

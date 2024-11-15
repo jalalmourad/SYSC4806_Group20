@@ -46,7 +46,7 @@ public class TopicProfRestControllerTest {
         testCreateProf();
         List<ProgramRestrictions> programs = new ArrayList<>();
         programs.add(ProgramRestrictions.CIVIL);
-        Topic newTopic = new Topic("Topic 1","New Topic descrription", programs, 30, Status.DRAFT);
+        Topic newTopic = new Topic("Topic 1","New Topic descrription", programs, 30, Status.OPEN);
         //addressBook.setId(1L);
 
         ResponseEntity<String> response = restTemplate.postForEntity(

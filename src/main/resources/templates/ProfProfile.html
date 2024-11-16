@@ -61,9 +61,10 @@
                                 <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                             </div>
                         </div>
-                        <form th:action="|/api/topics/deleteTopic/${t.id}|" method="DELETE">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
+                        <a th:href="@{/{pID}/profprofile/{id}(id=${t.id},pID=${professor.id})}" style="text-decoration: none;">
+                            <button class="btn btn-danger">Remove</button>
+                        </a>
+
                     </div>
                 </div>
             </div>

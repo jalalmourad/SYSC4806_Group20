@@ -55,6 +55,7 @@ public class ViewController {
     @GetMapping("/listTopics")
     public String topicList(Model model){
         model.addAttribute("topics", topicService.findAll());
+        model.addAttribute("topics", topicService.findAll());
         return "topicList";
     }
 
@@ -102,11 +103,19 @@ public class ViewController {
     }
 
 
-    @GetMapping("/listTopics/remove/{id}")
-    public String removeTopic(@PathVariable Long id) {
-        System.out.println(id + "Remove this");
+    @GetMapping("/{pID}/profprofile/{id}")
+    public String removeTopic(@PathVariable Long pID, @PathVariable Long id) {
+        Topic topic = topicService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Topic not found with id " + id));
+
+        Professor professor = topic.getProf();
+        if (professor != null) {
+            professor.removeTopic(topic);
+            professorService.save(professor);
+        }
         topicService.deleteById(id);
-        return "redirect:/listTopics";
+        return "redirect:/" + pID + "/profprofile";
     }
+
 
 }

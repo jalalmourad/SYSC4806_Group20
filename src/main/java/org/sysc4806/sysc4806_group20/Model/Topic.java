@@ -10,7 +10,7 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String title;
     private String description;
@@ -27,7 +27,7 @@ public class Topic {
     @OneToMany
     private List<Student> students;
 
-    @OneToOne
+    @ManyToOne
     private Professor prof;
 
     public Topic() {}

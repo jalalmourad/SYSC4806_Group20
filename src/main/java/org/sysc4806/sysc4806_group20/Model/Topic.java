@@ -42,7 +42,7 @@ public class Topic {
         this.students = new ArrayList<>();
     }
 
-    public long getId()
+    public Long getId()
     {
         return id;
     }
@@ -72,7 +72,7 @@ public class Topic {
     public Professor getProf() {
         return prof;
     }
-    public void setId(long id)
+    public void setId(Long id)
     {
         this.id = id;
     }

@@ -30,6 +30,7 @@ public class TopicRestController {
         System.out.println(topicRequest.getProgramRestrictions());
         profreturn.addTopic(topicRequest);
         topicRequest.setProf(profreturn);
+        System.out.println("prof id "+profreturn.getId());
         Topic topicAdded = topicService.save(topicRequest);
         professorService.save(profreturn);
         System.out.println("New Topic Created");

@@ -8,3 +8,5 @@ import org.sysc4806.sysc4806_group20.Model.UserAccount;
 public interface UserAccountRepository extends CrudRepository<UserAccount, Long> {
     UserAccount findByUsername(String username);
 }
+
+

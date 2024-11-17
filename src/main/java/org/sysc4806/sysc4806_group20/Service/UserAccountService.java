@@ -19,7 +19,7 @@ public class UserAccountService {
     }
 
     public Optional<UserAccount> findById(Long id) {
-        return UserAccountRepository.findById(id);
+        return userAccountRepository.findById(id);
     }
 
     public UserAccount save(UserAccount userAccount) {

@@ -36,6 +36,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/login"><i class="bi bi-card-list" style="padding-right: 5px"></i>Login</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
@@ -294,13 +297,14 @@
                 } else {
                     // Display validation errors from the controller
                     const errorMessages = result.errors || ["Invalid input."];
-                    errorMessages.forEach((error) => showAlert("danger", error));
+                    errorMessages.forEach((error) => showAlert("danger", result.message));
                 }
             })
             .catch((error) => {
                 console.error("Error:", error);
                 showAlert("danger", "An unexpected error occurred. Please try again.");
             });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Handle Student Form submission via AJAX
@@ -370,6 +374,7 @@
                 console.error("Error:", error);
                 showAlert("danger", "An unexpected error occurred. Please try again.");
             });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Function to display alert messages

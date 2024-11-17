@@ -26,17 +26,17 @@ public class UserAccountRestController {
 
         Map<String, Object> response = new HashMap<>();
 
-        if (userAccountService.findByUsername(username) != null) {
+        if (userAccountService.findByUsername(username) == null) {
             if (passwordService.checkPassword(hashedPassword)) {
                 response.put("success", true);
                 response.put("message", "Correct");
             } else {
                 response.put("success", false);
-                response.put("message", "Username correct, but password too simple.");
+                response.put("message", "Username OK, but password too simple.");
             }
         } else {
             response.put("success", false);
-            response.put("message", "Username does not exist.");
+            response.put("message", "Username already Taken.");
         }
 
         return ResponseEntity.ok(response);

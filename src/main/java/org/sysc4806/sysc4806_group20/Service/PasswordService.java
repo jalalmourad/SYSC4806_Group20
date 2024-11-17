@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class PasswordService {
 
-    public String unHashWeb(String hashedPassword) {
+    private String unHashWeb(String hashedPassword) {
         byte[] decodedBytes = Base64.getDecoder().decode(hashedPassword);
         return new String(decodedBytes);
     }
@@ -30,9 +30,8 @@ public class PasswordService {
     public Boolean checkPassword(String hashedPassword) {
         String password = unHashWeb(hashedPassword);
         List<String> restrictedPasswords = new ArrayList<>();
-
         // Read the restricted passwords from a text file
-        try (BufferedReader reader = new BufferedReader(new FileReader("restricted_passwords.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/org/sysc4806/sysc4806_group20/Service/restricted_passwords.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 restrictedPasswords.add(line.trim());
@@ -54,7 +53,7 @@ public class PasswordService {
 
     public boolean verifyPassword(String hashedPassword, String password) {
         String decodedHash = unHashWeb(hashedPassword);
-        return BCrypt.checkpw(password, decodedHash);
+        return BCrypt.checkpw(decodedHash, password);
     }
 
 }

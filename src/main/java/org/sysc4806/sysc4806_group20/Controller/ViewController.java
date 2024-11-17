@@ -42,6 +42,9 @@ public class ViewController {
         return "registration";
     }
 
+    @GetMapping("/login")
+    public String login(){ return "login";}
+
     /**
      * Testing
      */

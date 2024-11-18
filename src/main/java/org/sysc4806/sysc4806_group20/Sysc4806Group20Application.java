@@ -24,7 +24,7 @@ public class Sysc4806Group20Application {
         return (args) -> {
             // Create an admin account if one doesn't exist
             if (userAccountRepository.findByUsername("admin") == null) {
-                UserAccount admin = new UserAccount("admin", "$2b$12$n58MxR3nDHo70FmtrDDvle2Zal0vxbUUoLdWzNz9cLjD4IxOvnemS", UserRole.ADMIN);
+                UserAccount admin = new UserAccount("admin", "$2a$10$SI/xXe2E9CGVQiCfiecMQu0gEA9.sSDGatJU4rhC2T91l.31Wq5IC", UserRole.ADMIN);
                 userAccountRepository.save(admin);
             }
         };

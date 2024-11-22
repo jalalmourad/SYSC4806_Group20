@@ -15,6 +15,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private Long studentID;
+    private boolean hasTopic;
 
     public Student() {
 
@@ -24,6 +25,7 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.studentID = studentID;
+        hasTopic = false;
     }
 
     @Override
@@ -54,6 +56,12 @@ public class Student {
     }
     public void setStudentID(Long studentID) {
         this.studentID = studentID;
+    }
+    public void setHasTopic(boolean hasTopic){
+        this.hasTopic=hasTopic;
+    }
+    public boolean getHasTopic(){
+        return hasTopic;
     }
 
 

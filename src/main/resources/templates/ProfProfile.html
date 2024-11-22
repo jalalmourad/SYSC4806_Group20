@@ -47,6 +47,13 @@
     <div class="card">
         <div class="card-header">
             <h3 th:text="|Hi, ${professor.firstName}|"></h3>
+            <hr>
+            <h5>Search for students without a project:
+                <a th:href="@{/{pID}/profprofile/search(pID=${professor.id})}" style="text-decoration: none;">
+                    <button class="btn btn-primary">Search</button>
+                </a>
+            </h5>
+
         </div>
         <div class="card-body">
             <h5 class="card-title">List of Topics</h5>
@@ -64,7 +71,6 @@
                         <a th:href="@{/{pID}/profprofile/{id}(id=${t.id},pID=${professor.id})}" style="text-decoration: none;">
                             <button class="btn btn-danger">Remove</button>
                         </a>
-
                     </div>
                 </div>
             </div>

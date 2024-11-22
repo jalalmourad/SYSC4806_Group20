@@ -151,5 +151,20 @@ public class ViewController {
         return "redirect:/" + pID + "/profprofile";
     }
 
+    @GetMapping("/{pID}/profprofile/search")
+    public String searchForStudents(@PathVariable Long pID, Model model){
+        Iterable<Student> students = studentService.findAll();
+        ArrayList<Student> studentsWithNoTopic = new ArrayList<>();
+        for (Student s : students){
+            //if student has no topic
+            if(!s.getHasTopic()){
+                studentsWithNoTopic.add(s);
+            }
+        }
+        model.addAttribute("studentsWithNoTopic",studentsWithNoTopic);
+
+        return "NoTopicStudents";
+    }
+
 
 }

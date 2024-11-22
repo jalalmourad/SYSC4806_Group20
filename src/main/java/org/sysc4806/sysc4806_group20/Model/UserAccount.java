@@ -1,9 +1,14 @@
 package org.sysc4806.sysc4806_group20.Model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
-public class UserAccount {
+public class UserAccount implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +37,6 @@ public class UserAccount {
     public long getId()
     {
         return id;
-    }
-    public String getUsername()
-    {
-        return username;
-    }
-    public String getPassword() {
-        return password;
     }
     public UserRole getUserRole() {
         return userRole;
@@ -70,5 +68,40 @@ public class UserAccount {
         this.prof = null;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Return roles as authorities
+        return Collections.singleton(() -> "ROLE_" + userRole.name());
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }

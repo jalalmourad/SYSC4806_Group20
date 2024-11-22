@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.sysc4806.sysc4806_group20.Model.UserAccount;
+import org.sysc4806.sysc4806_group20.Model.UserRole;
 import org.sysc4806.sysc4806_group20.Service.PasswordService;
 import org.sysc4806.sysc4806_group20.Service.UserAccountService;
 
@@ -43,21 +44,44 @@ public class UserAccountRestController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam(value = "username") String username,
-                        @RequestParam(value = "password") String password,
-                        HttpSession session) {
-        // Validate user credentials
-        UserAccount user = userAccountService.validateCredentials(username, password);
+    public ResponseEntity<Map<String, Object>> login(@RequestParam(value = "username") String username,
+                                                     @RequestParam(value = "password") String password,
+                                                     HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
 
-        if (user != null) {
+        // Validate user credentials
+        UserAccount user = userAccountService.findByUsername(username);
+
+        if (user != null && passwordService.verifyPassword(password, user.getPassword())) {
             // Set session attributes
+            long id;
+            if(user.getUserRole() == UserRole.PROFESSOR)
+            {
+                id = user.getProfessor().getId();
+            }
+            else if(user.getUserRole() == UserRole.STUDENT)
+            {
+                id = user.getStudent().getId();
+            }
+            else
+            {
+                id = 0;
+            }
             session.setAttribute("userId", user.getId());
-            session.setAttribute("userRole", user.getUserRole());
-            return "Login successful!";
+            session.setAttribute("userSpecialId", id);
+            session.setAttribute("userRole", "ROLE_" + user.getUserRole());
+
+            response.put("success", true);
+            response.put("message", "Login successful!");
+            response.put("userId", user.getId());
+            response.put("userRole", user.getUserRole().name());
         } else {
-            return "Invalid credentials!";
+            response.put("success", false);
+            response.put("message", "Invalid credentials!");
         }
+        return ResponseEntity.ok(response);
     }
+
 
     @PostMapping("/logout")
     public String logout(HttpSession session) {

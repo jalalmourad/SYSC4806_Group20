@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Professor {
@@ -17,6 +18,8 @@ public class Professor {
     private String firstName;
     private String lastName;
     private Boolean coordinator;
+    @ElementCollection
+    private Map<String, String> availability;
 
     public Professor() {
     }
@@ -70,8 +73,14 @@ public class Professor {
     public Boolean getCoordinator() {
         return coordinator;
     }
-
     public void setId(Long id) {
         this.id = id;
+    }
+    public Map<String, String> getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Map<String, String> availability) {
+        this.availability = availability;
     }
 }

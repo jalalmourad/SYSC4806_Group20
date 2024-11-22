@@ -33,17 +33,17 @@ public class TopicProfRestControllerTest {
         Map<String, String> requestParams = new HashMap<>();
         requestParams.put("firstName", "John");
         requestParams.put("lastName", "Doe");
+        requestParams.put("coordinator", "false");
         requestParams.put("username", "johndoe");
         requestParams.put("password", "cGFzc3dvcmQ="); // Base64 for "password"
 
         ResponseEntity<Map> response = restTemplate.postForEntity(
-                "http://localhost:" + port + "/api/professors/newProfessor?firstName={firstName}&lastName={lastName}&username={username}&password={password}",
+                "http://localhost:" + port + "/api/professors/newProfessor?firstName={firstName}&lastName={lastName}&coordinator={coordinator}&username={username}&password={password}",
                 null,
                 Map.class,
                 requestParams
         );
 
-        // Verify HTTP status
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         // Extract the response body

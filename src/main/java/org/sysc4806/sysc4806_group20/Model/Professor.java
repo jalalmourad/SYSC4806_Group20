@@ -11,6 +11,7 @@ public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany
     private List<Topic> topics;
     private String firstName;

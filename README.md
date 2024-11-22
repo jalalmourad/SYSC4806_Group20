@@ -2,10 +2,11 @@
 [![Java CI with Maven](https://github.com/jalalmourad/SYSC4806_Group20/actions/workflows/maven.yml/badge.svg)](https://github.com/jalalmourad/SYSC4806_Group20/actions/workflows/maven.yml)
 
 ## Students
-Sami Mnif - 101199669
-Hadi Srour - 101200666
-Jalal Mourad - 101195065
-Ibtasam Rasool - 101186050
+Sami Mnif - 101199669  
+Hadi Srour - 101200666  
+Jalal Mourad - 101195065  
+Ibtasam Rasool - 101186050  
+Aaron Gabor - 101108064
 
 ## Diagrams
 
@@ -16,14 +17,13 @@ Ibtasam Rasool - 101186050
 ![UML Diagram](/README_imgs/Database_Schema.png)
 
 ## Log
-| Milestone     | 1   |
-|---------------|-----|
-| Sami Mnif     |     |
-| Hadi Srour    |     |
-| Jalal Mourad  |     |
-| Ibtasam Rasool|     |
-|               |     |
-|               |     |
+| Milestone      | 1   |
+|----------------|-----|
+| Sami Mnif      |     |
+| Hadi Srour     |     |
+| Jalal Mourad   |     |
+| Ibtasam Rasool |     |
+| Aaron Gabor    |     |
 
 ## Updates
 ![Registration](/README_imgs/registration.png)

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fourth Year Project</title>
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/addProject.css">
+
+    <nav>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">View Projects</a></li>
+            <li><a href="/html/addProject.html" class="active">Add Project</a></li>
+        </ul>
+    </nav>
+</head>
+<body>
+    <h1>Add New Project</h1>
+
+    <form id="new-project-form">
+        <label for="title" class="main-label">Title: </label><br>
+        <input type="text" id="title" name="title" class="title" required><br>
+        <label for="description" class="main-label">Description: </label><br>
+        <textarea id="description" name="description" required></textarea><br>
+        <legend>Program Restrictions</legend>
+
+        <table>
+            <tr>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="SOFTWARE_ENGINEERING">
+                        Software Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="ELECTRICAL_ENGINEERING">
+                        Electrical Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="AEROSPACE_ENGINEERING">
+                        Aerospace Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="BIOMEDICAL_ENGINEERING">
+                        Biomedical Engineering
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="ENVIRONMENTAL_ENGINEERING">
+                        Environmental Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="MECHANICAL_ENGINEERING">
+                        Mechanical Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="SUSTAINABILITY_ENGINEERING">
+                        Sustainability Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="CIVIL_ENGINEERING">
+                        Civil Engineering
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="COMMUNICATION_ENGINEERING">
+                        Communication Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="COMPUTER_SYSTEMS_ENGINEERING">
+                        Computer Systems Engineering
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="ENGINEERING_PHYSICS">
+                        Engineering Physics
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="MECHATRONICS_ENGINEERING">
+                        Mechatronics Engineering
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input type="checkbox" name="program-restrictions" value="RENEWABLE_ENERGY_ENGINEERING">
+                        Renewable Energy Engineering
+                    </label>
+                </td>
+                <td colspan="3"></td>
+            </tr>
+        </table><br>
+
+        <label for="status" class="main-label">Status: </label>
+        <select id="status" name="status"  class="status" required>
+            <option value="DRAFT">Draft</option>
+            <option value="POST">Post</option>
+            <option value="FULL">Full</option>
+            <option value="ARCHIVED">Archive</option>
+        </select><br><br>
+
+        <input type="submit" id="submit" name="submit" class="buttons">
+        <input type="reset" class="buttons">
+    </form>
+
+</body>
+</html>

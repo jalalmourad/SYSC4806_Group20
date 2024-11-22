@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+
+<form id="login-form">
+    <label for="username">Username: </label>
+    <input type="text" id="username" name="username" required><br>
+    <label for="password">Password: </label>
+    <input type="password" id="password" name="password" required><br><br>
+    <input type="submit" id="submit" value="Login">
+    <input type="reset" value="Reset">
+</form>
+
+<p id="error-message" style="color: red; display: none;">Invalid username or password. Please try again.</p>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Grab the username and password values from the form
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Encrypt the password using Base64 encoding
+            const encryptedPassword = btoa(password);
+
+            // Build the URL with query parameters
+            const createURL = `/api/userAccount/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(encryptedPassword)}`;
+
+            // Send request to the server
+            fetch(createURL, { // Ensure the URL matches the Spring controller's endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({username: username, password: encryptedPassword}) // Send JSON data
+            })
+                .then(response => response.json()) // Expect a JSON response
+                .then(data => {
+                    if (data.success) {
+                        // Login successful
+                        alert('Login Successful');
+                        window.location.href = '/'; // Redirect to the home page
+                    } else {
+                        // Display specific error message
+                        errorMessage.textContent = data.message || 'Invalid username or password.';
+                        errorMessage.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was a problem logging in. Please try again.');
+                });
+        });
+    });
+</script>
+</html>

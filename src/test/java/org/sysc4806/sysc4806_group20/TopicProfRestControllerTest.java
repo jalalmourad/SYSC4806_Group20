@@ -13,7 +13,9 @@ import org.sysc4806.sysc4806_group20.Model.Status;
 import org.sysc4806.sysc4806_group20.Model.Topic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,18 +29,36 @@ public class TopicProfRestControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void testCreateProf(){
-        Professor newProf = new Professor("John", "Doe");
+    public void testCreateProf() {
+        Map<String, String> requestParams = new HashMap<>();
+        requestParams.put("firstName", "John");
+        requestParams.put("lastName", "Doe");
+        requestParams.put("username", "johndoe");
+        requestParams.put("password", "cGFzc3dvcmQ="); // Base64 for "password"
 
-        ResponseEntity<Professor> response = restTemplate.postForEntity(
-                "http://localhost:" + port + "/api/professors/newProfessor?firstName=John&lastName=Doe", null, Professor.class
+        ResponseEntity<Map> response = restTemplate.postForEntity(
+                "http://localhost:" + port + "/api/professors/newProfessor?firstName={firstName}&lastName={lastName}&username={username}&password={password}",
+                null,
+                Map.class,
+                requestParams
         );
 
+        // Verify HTTP status
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isNotNull();
-        System.out.println(response);
-        System.out.println("Created Professor: " + response.getBody());
+
+        // Extract the response body
+        Map responseBody = response.getBody();
+        assertThat(responseBody).isNotNull();
+        assertThat(responseBody.get("success")).isEqualTo(true);
+        assertThat(responseBody.get("message")).isEqualTo("Professor created successfully.");
+
+        // Verify the professor data
+        Map professorData = (Map) responseBody.get("professor");
+        assertThat(professorData).isNotNull();
+        assertThat(professorData.get("id")).isNotNull();
+        assertThat(professorData.get("firstName")).isEqualTo("John");
+        assertThat(professorData.get("lastName")).isEqualTo("Doe");
+        System.out.println("Created Professor: " + professorData);
     }
 
     @Test

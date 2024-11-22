@@ -3,6 +3,7 @@ package org.sysc4806.sysc4806_group20.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -27,13 +28,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf
-                        .requireCsrfProtectionMatcher(
-                                new AntPathRequestMatcher("/api/**"))  // Enable CSRF only for specific paths
-                        .ignoringRequestMatchers("/api/professors/newProfessor", "/api/students/newStudent") // Disable for registration
-                        .ignoringRequestMatchers("/api/userAccount/login", "/api/userAccount/validate")
-                        .ignoringRequestMatchers("/listTopics")
-                )
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/professor/**").hasRole("PROFESSOR")

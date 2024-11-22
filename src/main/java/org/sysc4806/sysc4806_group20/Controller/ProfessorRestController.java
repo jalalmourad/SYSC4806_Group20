@@ -13,8 +13,9 @@ public class ProfessorRestController {
 
     @PostMapping("/newProfessor")
     public Professor newProfessor(@RequestParam(value = "firstName") String firstName,
-                                  @RequestParam(value = "lastName") String lastName){
-        Professor newProf = new Professor(firstName, lastName);
+                                  @RequestParam(value = "lastName") String lastName,
+                                  @RequestParam(value = "coordinator") Boolean coordinator){
+        Professor newProf = new Professor(firstName, lastName,coordinator);
         professorService.save(newProf);
         return newProf;
     }

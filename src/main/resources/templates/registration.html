@@ -69,6 +69,12 @@
                     <label for="professorLastName" class="form-label">Last Name</label>
                     <input type="text" class="form-control" id="professorLastName" placeholder="Enter your Last Name" required>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="coordinator">
+                    <label class="form-check-label" for="coordinator">
+                        Coordinator Role
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
         </div>
@@ -114,13 +120,14 @@
 
         const professorFirstName = document.getElementById("professorFirstName").value;
         const professorLastName = document.getElementById("professorLastName").value;
+        const coordinator = document.getElementById("coordinator").checked;
 
         const data = {
             firstName: professorFirstName,
             lastName: professorLastName
         };
 
-        const url = `/api/professors/newProfessor?firstName=${encodeURIComponent(professorFirstName)}&lastName=${encodeURIComponent(professorLastName)}`;
+        const url = `/api/professors/newProfessor?firstName=${encodeURIComponent(professorFirstName)}&lastName=${encodeURIComponent(professorLastName)}&coordinator=${encodeURIComponent(coordinator)}`;
 
         fetch(url, {
             method: 'POST',

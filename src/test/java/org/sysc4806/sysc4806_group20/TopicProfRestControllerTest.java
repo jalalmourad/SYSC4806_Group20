@@ -59,6 +59,7 @@ public class TopicProfRestControllerTest {
         assertThat(professorData.get("firstName")).isEqualTo("John");
         assertThat(professorData.get("lastName")).isEqualTo("Doe");
         System.out.println("Created Professor: " + professorData);
+
     }
 
     @Test

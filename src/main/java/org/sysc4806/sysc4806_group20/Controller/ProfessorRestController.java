@@ -37,7 +37,7 @@ public class ProfessorRestController {
                                           @RequestParam(value = "password") String hashPassword) {
 
         // Validate inputs
-        if (firstName == null || lastName == null || username == null || hashPassword == null || coordinator == null ||
+        if (firstName == null || lastName == null || username == null || hashPassword == null ||
                 firstName.isBlank() || lastName.isBlank() || username.isBlank() || hashPassword.isBlank()) {
             return ResponseEntity.badRequest()
                     .body(Map.of("success", false, "message", "All fields are required."));
@@ -67,12 +67,6 @@ public class ProfessorRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("success", false, "message", "An error occurred while creating the professor."));
         }
-    public Professor newProfessor(@RequestParam(value = "firstName") String firstName,
-                                  @RequestParam(value = "lastName") String lastName,
-                                  @RequestParam(value = "coordinator") Boolean coordinator){
-        Professor newProf = new Professor(firstName, lastName,coordinator);
-        professorService.save(newProf);
-        return newProf;
     }
 
     @DeleteMapping("/deleteProfessor")

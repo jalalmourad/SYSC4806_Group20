@@ -276,6 +276,7 @@
         const data = {
             firstName: professorFirstName,
             lastName: professorLastName,
+            coordinator: coordinator,
             username: professorUsername,
             password: hashedPassword
         };
@@ -303,30 +304,29 @@
                         body: JSON.stringify(data)
                     })
                         .then((createResponse) => createResponse.json())
-                        .then(data => {
-                            document.querySelectorAll("form").forEach(form => form.reset());
-                            $("#Alerts").append("<div class=\"alert alert-success d-flex align-items-center\" id='alert-" + professorFirstName + "' role=\"alert\">\n" +
-                                "  <i class=\"bi bi-check-circle-fill\" style='padding-right: 5px'></i>\n" +
-                                "  <div>\n" +
-                                "    New Professor User Created for " + professorFirstName + " \n" +
-                                "  </div>\n" +
-                                "</div>");
-                            setTimeout(function () {
-                                $('#alert-' + professorFirstName).remove();
-                            }, 15000);
-                        })
-                        .catch((error) => {
-                            $("#Alerts").append("<div class=\"alert alert-danger d-flex align-items-center\" id='alert-" + professorFirstName + "' role=\"alert\">\n" +
-                                "  <i class=\"bi bi-x-octagon\" style='padding-right: 5px'></i>\n" +
-                                "  <div>\n" +
-                                "    Error Occured, please try again \n" +
-                                "  </div>\n" +
-                                "</div>");
-                            setTimeout(function () {
-                                $('#alert-' + professorFirstName).remove();
-                            }, 15000);
-                            console.error('Error:', error);
+                        .then((createResult) => {
+                            if (createResult.success) {
+                                // Display success message
+                                showAlert(
+                                    "success",
+                                    `Professor account for ${professorFirstName} created successfully!`
+                                );
+                                document.querySelectorAll("form").forEach((form) => form.reset());
+                            } else {
+                                // Display specific creation error
+                                showAlert("danger", createResult.message || "Error creating account.");
+                            }
                         });
+                } else {
+                    // Display validation errors from the controller
+                    const errorMessages = result.errors || ["Invalid input."];
+                    errorMessages.forEach((error) => showAlert("danger", result.message));
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                showAlert("danger", "An unexpected error occurred. Please try again.");
+            });
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 

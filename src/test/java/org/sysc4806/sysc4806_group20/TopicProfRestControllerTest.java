@@ -28,10 +28,10 @@ public class TopicProfRestControllerTest {
 
     @Test
     public void testCreateProf(){
-        Professor newProf = new Professor("John", "Doe");
+        Professor newProf = new Professor("John", "Doe", false);
 
         ResponseEntity<Professor> response = restTemplate.postForEntity(
-                "http://localhost:" + port + "/api/professors/newProfessor?firstName=John&lastName=Doe", null, Professor.class
+                "http://localhost:" + port + "/api/professors/newProfessor?firstName=John&lastName=Doe&coordinator=false", null, Professor.class
         );
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

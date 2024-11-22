@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Professor {
@@ -16,17 +17,19 @@ public class Professor {
     private List<Topic> topics;
     private String firstName;
     private String lastName;
+    private Boolean coordinator;
+    @ElementCollection
+    private Map<String, String> availability;
 
     public Professor() {
     }
 
-    public Professor(String firstName, String lastName) {
+    public Professor(String firstName, String lastName, Boolean coordinator) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.coordinator = coordinator;
         this.topics = new ArrayList<>();
     }
-
-
 
     public void setId(long id) {
         this.id = id;
@@ -65,5 +68,19 @@ public class Professor {
     }
     public List<Topic> getTopics(){
         return topics;
+    }
+
+    public Boolean getCoordinator() {
+        return coordinator;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Map<String, String> getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Map<String, String> availability) {
+        this.availability = availability;
     }
 }

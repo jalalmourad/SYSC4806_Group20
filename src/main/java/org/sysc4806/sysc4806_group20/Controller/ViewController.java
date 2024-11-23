@@ -127,7 +127,40 @@ public class ViewController {
         Student studentreturn = studentService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found with id " + id));
         model.addAttribute("student", studentreturn);
-        System.out.println(studentreturn);
+        List<String> weekdays = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        model.addAttribute("weekdays", weekdays);
+
+        List<List<String>> availabilityList = new ArrayList<>();
+
+        Map<String, String> availability = studentreturn.getAvailability();
+        if (availability == null) {
+            availability = new HashMap<>();
+        }
+
+        // Populate availabilityList
+        for (String day : weekdays) {
+            List<String> availableHours = new ArrayList<>();
+            String timeRange = availability.get(day);
+
+            if (timeRange != null && !timeRange.equals(" - ")) {
+                String[] times = timeRange.split(" - ");
+                String startHour = times[0].split(":")[0]; // Extract the hour part
+                String endHour = times[1].split(":")[0]; // Extract the hour part
+
+                // Create a list of hours from start to end
+                for (int i = Integer.parseInt(startHour); i <= Integer.parseInt(endHour); i++) {
+                    availableHours.add(i + ":00");
+                }
+            } else {
+                availableHours.add("Not Available");
+            }
+
+            availabilityList.add(availableHours);
+        }
+
+        // Add availability list to model
+        model.addAttribute("availabilityList", availabilityList);
+
         return "StudentProfile";
     }
 

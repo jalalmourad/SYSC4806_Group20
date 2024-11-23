@@ -2,6 +2,7 @@ package org.sysc4806.sysc4806_group20.Controller;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import org.sysc4806.sysc4806_group20.Model.Professor;
 import org.sysc4806.sysc4806_group20.Model.Student;
 import org.sysc4806.sysc4806_group20.Model.Topic;
@@ -44,14 +45,14 @@ public class TopicRestController {
 
 
     @PostMapping("/addStudentToTopic")
-    public Topic addStudentToTopic(@RequestParam Long topic, @RequestParam Long studentNum){
+    public RedirectView addStudentToTopic(@RequestParam Long topic, @RequestParam Long studentNum){
         System.out.println(topic+ " " + studentNum);
         Student student = studentService.findById(studentNum).orElseThrow(() -> new ResourceNotFoundException
                 ("No Student found with id" + studentNum));
         Topic topicToAddStudent = topicService.findById(topic).orElseThrow(() -> new ResourceNotFoundException("No Topic Found"));
         topicToAddStudent.addStudent(student);
         topicService.save(topicToAddStudent);
-        return topicToAddStudent;
+        return new RedirectView("/" + studentNum + "/listTopics");
     }
 
     @DeleteMapping("/deleteTopic/{id}")

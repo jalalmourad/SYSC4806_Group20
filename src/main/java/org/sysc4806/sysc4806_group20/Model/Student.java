@@ -1,9 +1,9 @@
 package org.sysc4806.sysc4806_group20.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Student {
@@ -16,6 +16,12 @@ public class Student {
     private String lastName;
     private Long studentID;
     private boolean hasTopic;
+
+    @ElementCollection
+    private Map<String, String> availability;
+
+    @ElementCollection
+    private List<String> uploads;
 
     public Student() {
 
@@ -64,5 +70,25 @@ public class Student {
         return hasTopic;
     }
 
+
+    public Map<String, String> getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Map<String, String> availability) {
+        this.availability = availability;
+    }
+
+    public List<String> getUploads() {
+        return uploads;
+    }
+
+    public void setUploads(List<String> uploads) {
+        this.uploads = uploads;
+    }
+
+    public void addUpload(String upload){
+        this.uploads.add(upload);
+    }
 
 }

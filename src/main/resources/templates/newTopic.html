@@ -48,7 +48,7 @@
 </div>
 </body>
 <script th:inline="javascript">
-    let profId = [[${profId}]];
+    let profId = [[$,{profId}]];
 </script>
 <script>
     document.querySelector("form").addEventListener("submit", function(e) {

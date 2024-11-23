@@ -43,6 +43,32 @@
     </div>
 </nav>
 <div class="container mt-5">
+    <div id="submit-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Submit Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please upload your report below. Only PDF files are accepted.</p>
+
+                    <form method="POST" th:action="@{/api/dropbox/upload}" enctype="multipart/form-data">
+                        <input type="hidden" name="studentId" th:value="${student.getId()}">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Upload Report</label>
+                            <input type="file" id="file" name="file" class="form-control" accept=".pdf" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Submit File</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <h1>Student Profile</h1>
     <div class="card">
         <div class="card-header" th:text="|Hi, ${student.firstName}|">
@@ -52,6 +78,70 @@
 
         </div>
     </div>
+
+    <h2>Student Availability</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th th:each="day : ${weekdays}" th:text="${day}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hour : ${#numbers.sequence(8, 20)}">
+            <td th:text="${hour + ':00'}"></td>
+            <td th:each="day, iStat : ${weekdays}">
+                <!--<div th:text="'Day: ' + ${day} + ', Hour: ' + ${hour + ':00'} + ', Availability: ' + ${availabilityList[iStat.index]} + ${iStat.index} + ' tt: '+ ${availabilityList[iStat.index][0]}"></div>-->
+
+                <!-- Check availability for each day and hour-->
+                <div th:if="${availabilityList[iStat.index][0] != 'Not Available'}"
+                     th:classappend="'bg-success text-white'">
+                    <div th:if="${hour >= 10 and availabilityList[iStat.index].contains(hour + ':00')}"
+                         th:classappend="'bg-success text-white'">
+                        Available
+                    </div>
+                </div>
+                <div th:if="${availabilityList[iStat.index][0] == 'Not Available'}">
+
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Reset Availability</h2>
+    <form method="POST" th:action="@{/api/students/updateAvailability(id=${student.id})}">
+        <div class="row g-3">
+            <div class="col-md-4" th:each="day : ${weekdays}">
+                <label th:for="${day}" th:text="${day}" class="form-label"></label>
+                <div class="input-group">
+                    <input type="time" class="form-control" th:name="${day + 'Start'}" min="08:00" max="20:00">
+                    <span class="input-group-text">to</span>
+                    <input type="time" class="form-control" th:name="${day + 'End'}" min="08:00" max="20:00">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Save Availability</button>
+    </form>
+
+    <br>
+    <h2>Submit Your Report</h2>
+    <p>To meet the requirements for submitting your report by the deadline of December 15, 2025, ensure that it adheres to the following specifications.
+        The report must have proper formatting, which typically includes clear headings, a title page, a table of contents, numbered pages, consistent font styles and sizes,
+        proper spacing, and alignment for readability. Additionally, the report must be exactly 30 pages long, so plan your content and layout carefully to meet this length without falling short or exceeding the limit.
+    </p>
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#submit-modal">Submit Report</button>
+
+    <br>
+    <div th:if="${student.getUploads().size() > 0}">
+        <b>Uploaded files</b>
+        <ul class="list-unstyled" th:each="file : ${student.getUploads()}">
+            <a th:href="@{/api/dropbox/download/{file}(file=${file})}" th:text="${file}"></a>
+
+        </ul>
+    </div>
+    <br>
+
 </div>
 
 </body>

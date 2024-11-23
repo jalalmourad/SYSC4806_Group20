@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
+import org.sysc4806.sysc4806_group20.Model.Professor;
 import org.sysc4806.sysc4806_group20.Model.Student;
 import org.sysc4806.sysc4806_group20.Model.UserAccount;
 import org.sysc4806.sysc4806_group20.Service.PasswordService;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
 import org.sysc4806.sysc4806_group20.Service.UserAccountService;
+
+import java.util.HashMap;
 import java.util.Map;
 import static org.sysc4806.sysc4806_group20.Model.UserRole.STUDENT;
 
@@ -63,4 +67,26 @@ public class StudentRestController {
                     .body(Map.of("success", false, "message", "An error occurred while creating the student."));
         }
     }
+
+    @PostMapping("/updateAvailability")
+    public RedirectView updateAvailability(@RequestParam Map<String, String> params, @RequestParam(value = "id") Long studentId) {
+        Student student = studentService.findById(studentId).orElseThrow();
+        Map<String, String> availability = new HashMap<>();
+
+        for (String day : new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}) {
+            String start = params.get(day + "Start");
+            String end = params.get(day + "End");
+
+            if (start != null && end != null) {
+                availability.put(day, start + " - " + end);
+            }
+        }
+
+        student.setAvailability(availability);
+        studentService.save(student);
+
+        return new RedirectView("/" + studentId + "/studentprofile");
+    }
+
+
 }

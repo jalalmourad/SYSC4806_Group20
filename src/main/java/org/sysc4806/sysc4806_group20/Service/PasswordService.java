@@ -31,14 +31,14 @@ public class PasswordService {
         String password = unHashWeb(hashedPassword);
         List<String> restrictedPasswords = new ArrayList<>();
         // Read the restricted passwords from a text file
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/org/sysc4806/sysc4806_group20/Service/restricted_passwords.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("./restricted_passwords.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 restrictedPasswords.add(line.trim());
             }
         } catch (IOException e) {
             System.err.println("Error reading the restricted passwords file: " + e.getMessage());
-            return false; // Assume false if the file cannot be read
+            return true; // Assume false if the file cannot be read
         }
 
         // Check if the password matches any in the list

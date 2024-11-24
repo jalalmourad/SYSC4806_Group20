@@ -17,6 +17,9 @@ public class Student {
     private Long studentID;
     private boolean hasTopic;
 
+    @OneToOne
+    private Topic joinedTopic;
+
     @ElementCollection
     private Map<String, String> availability;
 
@@ -31,7 +34,8 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.studentID = studentID;
-        hasTopic = false;
+        this.hasTopic = false;
+        this.joinedTopic = null;
     }
 
     @Override
@@ -91,4 +95,10 @@ public class Student {
         this.uploads.add(upload);
     }
 
+    public Topic getJoinedTopic() {
+        return joinedTopic;
+    }
+    public void setJoinedTopic(Topic joinedTopic) {
+        this.joinedTopic = joinedTopic;
+    }
 }

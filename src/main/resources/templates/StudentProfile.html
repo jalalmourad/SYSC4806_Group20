@@ -29,10 +29,10 @@
                         Prof
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sign In</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="/login">Sign In</a></li>
+                        <li><a class="dropdown-item" href="/profprofile">Profile</a></li>
                         <!--<li><hr class="dropdown-divider"></li>-->
-                        <li><a class="dropdown-item" href="#">Add Topic</a></li>
+                        <li><a class="dropdown-item" href="/newTopic">Add Topic</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -110,7 +110,7 @@
     </table>
 
     <h2>Reset Availability</h2>
-    <form method="POST" th:action="@{/api/students/updateAvailability(id=${student.id})}">
+    <form method="POST" th:action="/api/students/updateAvailability">
         <div class="row g-3">
             <div class="col-md-4" th:each="day : ${weekdays}">
                 <label th:for="${day}" th:text="${day}" class="form-label"></label>

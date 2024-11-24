@@ -58,7 +58,7 @@
 
             <hr>
             <h5>Search for students without a project:
-                <a th:href="@{/{pID}/profprofile/search(pID=${professor.id})}" style="text-decoration: none;">
+                <a th:href="@{/profprofile/search}" style="text-decoration: none;">
                     <button class="btn btn-primary">Search</button>
                 </a>
             </h5>
@@ -78,7 +78,7 @@
                                 <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                             </div>
                         </div>
-                        <a th:href="@{/{pID}/profprofile/{id}(id=${t.id},pID=${professor.id})}"
+                        <a th:href="@{/profprofile/{id}(id=${topic.id})}"
                            style="text-decoration: none;">
                             <button class="btn btn-danger">Remove</button>
                         </a>
@@ -121,7 +121,7 @@
 
 
     <h2>Reset Availability</h2>
-    <form method="POST" th:action="@{/api/professors/updateAvailability(id=${professor.id})}">
+    <form method="POST" th:action="@{/api/professors/updateAvailability}">
         <div class="row g-3">
             <div class="col-md-4" th:each="day : ${weekdays}">
                 <label th:for="${day}" th:text="${day}" class="form-label"></label>

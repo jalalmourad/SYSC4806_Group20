@@ -71,6 +71,7 @@ public class UserAccountRestController {
             session.setAttribute("userSpecialId", id);
             session.setAttribute("userRole", "ROLE_" + user.getUserRole());
 
+
             response.put("success", true);
             response.put("message", "Login successful!");
             response.put("userId", user.getId());

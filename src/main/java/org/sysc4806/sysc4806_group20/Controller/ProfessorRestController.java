@@ -1,5 +1,6 @@
 package org.sysc4806.sysc4806_group20.Controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,7 +77,8 @@ public class ProfessorRestController {
     }
 
     @PostMapping("/updateAvailability")
-    public RedirectView updateAvailability(@RequestParam Map<String, String> params, @RequestParam(value = "id") Long professorId) {
+    public RedirectView updateAvailability(@RequestParam Map<String, String> params, HttpSession session) {
+        long professorId = (long) session.getAttribute("userSpecialId");
         Professor professor = professorService.findById(professorId).orElseThrow();
         Map<String, String> availability = new HashMap<>();
 
@@ -92,6 +94,6 @@ public class ProfessorRestController {
         professor.setAvailability(availability);
         professorService.save(professor);
 
-        return new RedirectView("/" + professorId + "/profprofile");
+        return new RedirectView("/profprofile");
     }
 }

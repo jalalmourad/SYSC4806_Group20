@@ -47,9 +47,6 @@
     </form>
 </div>
 </body>
-<script th:inline="javascript">
-    let profId = [[${profId}]];
-</script>
 <script>
     document.querySelector("form").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -72,7 +69,7 @@
 
         console.log(data);
         // Send the AJAX POST request
-        fetch(`/api/topics/newTopic/${profId}`, {
+        fetch(`/api/topics/newTopic`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

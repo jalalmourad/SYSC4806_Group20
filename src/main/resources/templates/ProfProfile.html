@@ -13,21 +13,56 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<div th:replace="common/navbar :: common-navbar"/>
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="bi bi-house" style="padding-right: 5px"></i>Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/registration"><i class="bi bi-arrow-up-right-circle"
+                                                                                    style="padding-right: 5px"></i>Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/listTopics"><i class="bi bi-card-list"
+                                                                                  style="padding-right: 5px"></i>List of
+                        Topics</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Prof
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Sign In</a></li>
+                        <li><a class="dropdown-item active" href="#">Profile</a></li>
+                        <!--<li><hr class="dropdown-divider"></li>-->
+                        <li><a class="dropdown-item" href="#">Add Topic</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container mt-5">
     <h1>Professor Profile</h1>
     <div class="card">
         <div class="card-header">
             <h3 th:text="|Hi, ${professor.firstName}|"></h3>
-            <span class="badge text-bg-success" th:if="${professor.coordinator}">Coordinator</span>
+
             <hr>
-            <div th:if="${professor.coordinator}">
-                <h5>Search for students without a project:
-                    <a th:href="@{/{pID}/profprofile/search(pID=${professor.id})}" style="text-decoration: none;">
-                        <button class="btn btn-primary">Search</button>
-                    </a>
-                </h5>
-            </div>
+            <h5>Search for students without a project:
+                <a th:href="@{/profprofile/search}" style="text-decoration: none;">
+                    <button class="btn btn-primary">Search</button>
+                </a>
+            </h5>
+            <span class="badge text-bg-success" th:if="${professor.coordinator}">Coordinator</span>
         </div>
         <div class="card-body">
             <h5 class="card-title">List of Topics</h5>
@@ -42,13 +77,11 @@
                             <div th:each="p : ${t.programRestrictions}">
                                 <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                             </div>
-                            <hr class="border border-secondary border-2 opacity-75">
-                            <a th:href="@{/{pID}/profprofile/{id}(id=${t.id},pID=${professor.id})}"
-                               style="text-decoration: none;">
-                                <button class="btn btn-danger">Remove</button>
-                            </a>
                         </div>
-
+                        <a th:href="@{/profprofile/{id}(id=${topic.id})}"
+                           style="text-decoration: none;">
+                            <button class="btn btn-danger">Remove</button>
+                        </a>
                     </div>
                 </div>
                 <br><br>
@@ -88,7 +121,7 @@
 
 
     <h2>Reset Availability</h2>
-    <form method="POST" th:action="@{/api/professors/updateAvailability(id=${professor.id})}">
+    <form method="POST" th:action="@{/api/professors/updateAvailability}">
         <div class="row g-3">
             <div class="col-md-4" th:each="day : ${weekdays}">
                 <label th:for="${day}" th:text="${day}" class="form-label"></label>

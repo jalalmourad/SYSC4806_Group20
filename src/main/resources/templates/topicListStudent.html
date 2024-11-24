@@ -75,7 +75,6 @@
 </div>
 
 <script>
-    let studentNum = [[${student_id}]];
     $(document).ready(function()
     {
         $(".join-button").on("click", function(){
@@ -85,7 +84,7 @@
     })
 
     function addStudent(topic) {
-        fetch(`/api/topics/addStudentToTopic?topic=${topic}&studentNum=${studentNum}`, {
+        fetch(`/api/topics/addStudentToTopic?topic=${topic}`, {
             method: 'POST'
         }).then(response => {
             if (response.ok){

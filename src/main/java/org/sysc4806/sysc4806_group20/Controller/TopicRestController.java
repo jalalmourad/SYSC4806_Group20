@@ -70,7 +70,9 @@ public class TopicRestController {
                 ("No Student found with id" + studentNum));
         Topic topicToAddStudent = topicService.findById(topic).orElseThrow(() -> new ResourceNotFoundException("No Topic Found"));
         topicToAddStudent.addStudent(student);
+        student.setJoinedTopic(topicToAddStudent);
         topicService.save(topicToAddStudent);
+        studentService.save(student);
         return new RedirectView("/" + studentNum + "/listTopics");
     }
 

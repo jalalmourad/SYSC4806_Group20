@@ -70,7 +70,7 @@ public class TopicStudentRestController {
             Map<String, String> requestParams = new HashMap<>();
             requestParams.put("firstName", "");
             requestParams.put("lastName", "Doe");
-            requestParams.put("studentNumber", "1010101010");
+            requestParams.put("studentNumber", "1122444554");
             requestParams.put("username", "johndoe");
             requestParams.put("password", "password123");
 

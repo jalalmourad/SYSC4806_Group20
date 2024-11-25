@@ -4,12 +4,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-import org.sysc4806.sysc4806_group20.Model.Professor;
 import org.sysc4806.sysc4806_group20.Model.Student;
 import org.sysc4806.sysc4806_group20.Model.UserAccount;
 import org.sysc4806.sysc4806_group20.Service.PasswordService;
@@ -60,7 +56,7 @@ public class StudentRestController {
             return ResponseEntity.ok(Map.of(
                     "success", true,
                     "message", "Student created successfully.",
-                    "professor", savedStudent // Include necessary details or use a DTO
+                    "student", savedStudent // Include necessary details or use a DTO
             ));
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,5 +86,8 @@ public class StudentRestController {
         return new RedirectView("/studentprofile");
     }
 
-
+    @GetMapping("/getAllStudents")
+    public Iterable<Student> listAllTopics(){
+        return studentService.findAll();
+    }
 }

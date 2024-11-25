@@ -1,6 +1,9 @@
 # SYSC4806 Group 20
 [![Java CI with Maven](https://github.com/jalalmourad/SYSC4806_Group20/actions/workflows/maven.yml/badge.svg)](https://github.com/jalalmourad/SYSC4806_Group20/actions/workflows/maven.yml)
 
+## Azure Link
+[https://sysc4806group20-d8dwhjc5evgccra8.canadaeast-01.azurewebsites.net/](https://sysc4806group20-d8dwhjc5evgccra8.canadaeast-01.azurewebsites.net/)
+
 ## Students
 Sami Mnif - 101199669  
 Hadi Srour - 101200666  
@@ -11,19 +14,19 @@ Aaron Gabor - 101108064
 ## Diagrams
 
 ### UML Diagram
-![UML Diagram](/README_imgs/Sysc4806Group20UML.png)
+![UML Diagram](/README_imgs/SYSC4806_Group20UML2.png)
 
 ### Database Schema
 ![UML Diagram](/README_imgs/Database_Schema.png)
 
 ## Log
-| Milestone      | 1   |
-|----------------|-----|
-| Sami Mnif      |     |
-| Hadi Srour     |     |
-| Jalal Mourad   |     |
-| Ibtasam Rasool |     |
-| Aaron Gabor    |     |
+| Milestone      | 1   | 2  |
+|----------------|-----|----|
+| Sami Mnif      |     |    |
+| Hadi Srour     |     |    |
+| Jalal Mourad   |     |    |
+| Ibtasam Rasool |     |    |
+| Aaron Gabor    |     |    |
 
 ## Updates
 ![Registration](/README_imgs/registration.png)

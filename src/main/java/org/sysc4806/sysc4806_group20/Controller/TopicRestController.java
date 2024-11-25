@@ -73,7 +73,7 @@ public class TopicRestController {
         student.setJoinedTopic(topicToAddStudent);
         topicService.save(topicToAddStudent);
         studentService.save(student);
-        return new RedirectView("/" + studentNum + "/listTopics");
+        return new RedirectView("/listStudentTopics");
     }
 
     @DeleteMapping("/deleteTopic/{id}")

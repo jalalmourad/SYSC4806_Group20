@@ -52,8 +52,11 @@ public class ViewController {
         if(session.getAttribute("userRole") == null) {return "login";}
         if(session.getAttribute("userRole").equals("ROLE_STUDENT") || session.getAttribute("userRole").equals("ROLE_ADMIN")) {
             long id = (long) session.getAttribute("userSpecialId");
+            Student student = studentService.findById(id).orElseThrow(() -> new ResourceNotFoundException
+                    ("No Student found with id" + id));
             model.addAttribute("topics", topicService.findAll());
             model.addAttribute("student_id", id);
+            model.addAttribute("student", student);
             return "topicListStudent";
         }
         else return "login";

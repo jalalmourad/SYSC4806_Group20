@@ -64,4 +64,25 @@ public class TopicStudentRestController {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotEmpty();
     }
+
+        @Test
+        public void testCreateStudentInvalidInput() {
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("firstName", "");
+            requestParams.put("lastName", "Doe");
+            requestParams.put("studentNumber", "1122444554");
+            requestParams.put("username", "johndoe");
+            requestParams.put("password", "password123");
+
+            ResponseEntity<Map> response = restTemplate.postForEntity(
+                    "http://localhost:" + port + "/api/students/newStudent?firstName={firstName}&lastName={lastName}&studentNumber={studentNumber}&username={username}&password={password}", null,Map.class, requestParams);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+            Map responseBody = response.getBody();
+            assertThat(responseBody).isNotNull();
+            assertThat(responseBody.get("success")).isEqualTo(false);
+            assertThat(responseBody.get("message")).isEqualTo("All fields are required.");
+        }
+
+
+
 }

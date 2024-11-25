@@ -12,6 +12,7 @@
 <body>
 <div th:replace="common/navbar :: common-navbar" />
 <div class="container mt-5">
+    <div id="Alerts"></div>
     <table class="table table-striped ">
         <thead>
         <tr class="table-primary">
@@ -36,7 +37,7 @@
             <td th:text="${t.numberOfStudents}"></td>
             <td>
                 <div class="col-12">
-                    <button type="button" class="btn btn-primary join-button" th:value="${t.id}"> Join </button>
+                    <button type="button" class="btn btn-primary join-button" th:value="${t.id}" th:disabled="${student.hasTopic}"> Join </button>
                 </div>
             </td>
         </tr>
@@ -58,7 +59,8 @@
             method: 'POST'
         }).then(response => {
             if (response.ok){
-                alert('Student added');
+                //alert('Student added');
+                location.reload();
             } else {
                 alert("Failed to add student")
             }

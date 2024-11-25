@@ -99,6 +99,7 @@ public class Student {
         return joinedTopic;
     }
     public void setJoinedTopic(Topic joinedTopic) {
+        this.hasTopic = true;
         this.joinedTopic = joinedTopic;
     }
 }

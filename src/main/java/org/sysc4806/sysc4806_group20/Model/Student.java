@@ -83,6 +83,12 @@ public class Student {
     public void setSubmitted(boolean submitted){
         this.submitted=submitted;
     }
+    public String getFileName(){
+        return fileName;
+    }
+    public void setFileName(String fileName){
+        this.fileName=fileName;
+    }
 
 
     public Map<String, String> getAvailability() {

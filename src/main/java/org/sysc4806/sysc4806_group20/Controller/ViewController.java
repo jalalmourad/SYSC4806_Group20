@@ -236,5 +236,21 @@ public class ViewController {
         else return "login";
     }
 
+    @GetMapping("/profProfile/submissions")
+    public String viewSubmissions(Model model){
+
+        Iterable<Student> students = studentService.findAll();
+        ArrayList<Student> studentSubmitted = new ArrayList<>();
+        for (Student s : students) {
+
+            if (s.isSubmitted()==true) {
+                studentSubmitted.add(s);
+            }
+        }
+
+        model.addAttribute("submittedStudents", studentSubmitted);
+        return "Submissions";
+    }
+
 
 }

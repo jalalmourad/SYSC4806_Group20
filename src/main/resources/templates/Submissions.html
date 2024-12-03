@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Submissions</title>
+</head>
+<body>
+
+<h2>
+    Submissions:
+</h2>
+
+<ul>
+
+    <li th:each="s : ${submittedStudents}">
+        <span>Student Name: <span th:text="${s.firstName}"></span></span>
+        <span>ID: <span th:text="${s.id}"></span></span>
+        <span>File Name: <span th:text="${s.}"></span></span>
+
+    </li>
+
+
+</ul>
+
+</body>
+</html>

@@ -103,5 +103,54 @@
     </form>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to fetch the user role from the server
+        function fetchUserRole() {
+            return fetch("/api/navBar/getRole")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                })
+                .catch((error) => {
+                    console.error("Error fetching user role:", error);
+                    return "Guest"; // Default to "Guest" on error
+                });
+        }
+
+        // Get menu elements
+        const professorMenu = document.getElementById("professor");
+        const studentMenu = document.getElementById("student");
+        const loginMenu = document.getElementById("login");
+        const logoutMenu = document.getElementById("logout");
+
+        // Hide all menus initially
+        professorMenu.style.display = "none";
+        studentMenu.style.display = "none";
+        loginMenu.style.display = "none";
+        logoutMenu.style.display = "none";
+
+        // Fetch user role and update UI accordingly
+        fetchUserRole().then((userRole) => {
+
+            // Show/hide menus based on user role
+            if (userRole === "Student") {
+                studentMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else if (userRole === "Professor") {
+                professorMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else if (userRole === "Admin") {
+                professorMenu.style.display = "block";
+                studentMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else {
+                loginMenu.style.display = "block"; // Guest user
+            }
+        });
+    });
+</script>
 </body>
 </html>

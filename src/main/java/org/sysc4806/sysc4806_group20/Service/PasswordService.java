@@ -2,9 +2,9 @@ package org.sysc4806.sysc4806_group20.Service;
 
 import org.springframework.stereotype.Service;
 import org.mindrot.jbcrypt.BCrypt;
+import org.sysc4806.sysc4806_group20.Model.RestrictedPasswords;
 
 import java.util.Base64;
-import java.util.List;
 
 @Service
 public class PasswordService {

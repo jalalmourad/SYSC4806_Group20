@@ -50,6 +50,8 @@ public class DropboxController {
 
             Student student = studentService.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Student with this ID not found"));
             student.addUpload(fileName);
+            student.setSubmitted(true);
+            student.setFileName(file.getOriginalFilename());
             studentService.save(student);
 
 

@@ -16,6 +16,9 @@ public class Student {
     private String lastName;
     private Long studentID;
     private boolean hasTopic;
+    private String fileName;
+
+    private boolean submitted;
 
     @OneToOne
     private Topic joinedTopic;
@@ -36,6 +39,7 @@ public class Student {
         this.studentID = studentID;
         this.hasTopic = false;
         this.joinedTopic = null;
+        this.submitted = false;
     }
 
     @Override
@@ -72,6 +76,18 @@ public class Student {
     }
     public boolean getHasTopic(){
         return hasTopic;
+    }
+    public boolean isSubmitted(){
+        return submitted;
+    }
+    public void setSubmitted(boolean submitted){
+        this.submitted=submitted;
+    }
+    public String getFileName(){
+        return fileName;
+    }
+    public void setFileName(String fileName){
+        this.fileName=fileName;
     }
 
 

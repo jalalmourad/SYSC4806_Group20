@@ -24,16 +24,6 @@ class PasswordServiceTest {
         return Base64.getEncoder().encodeToString(password.getBytes());
     }
 
-    @BeforeEach
-    void setupRestrictedPasswordsFile() throws IOException {
-        // Set up a mock restricted passwords file
-        try (FileWriter writer = new FileWriter("./restricted_passwords.txt")) {
-            writer.write("123456\n");
-            writer.write("password\n");
-            writer.write("qwerty\n");
-        }
-    }
-
     @Test
     void testHashToSave() {
         String rawPassword = "testPassword";
@@ -53,7 +43,11 @@ class PasswordServiceTest {
 
     @Test
     void testCheckPasswordInvalid() {
-        String restrictedPassword = encodeForWeb("123456");
+        String restrictedPassword = encodeForWeb("Password1!");
+        assertFalse(passwordService.checkPassword(restrictedPassword));
+        restrictedPassword = encodeForWeb("Adventure2024!");
+        assertFalse(passwordService.checkPassword(restrictedPassword));
+        restrictedPassword = encodeForWeb("Electric123#");
         assertFalse(passwordService.checkPassword(restrictedPassword));
     }
 

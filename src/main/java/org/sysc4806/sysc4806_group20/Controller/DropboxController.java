@@ -60,7 +60,7 @@ public class DropboxController {
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/" + studentId + "/studentprofile");
+        headers.add("Location", "/studentprofile");
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 

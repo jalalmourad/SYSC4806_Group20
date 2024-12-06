@@ -50,7 +50,19 @@
                                 </span>
                                 <!--<span class="badge text-bg-secondary" th:text="${t.status}"></span>-->
                             </h6>
-                            <p class="card-text" th:text="|Description: ${t.description}|"></p>
+                            <h6>Description:</h6>
+                            <p class="card-text" th:text="|${t.description}|"></p>
+                            <h6>Presentation Time:</h6>
+                            <p th:if="${t.presentationDateTime != null}">
+                                <strong>Date:</strong>
+                                <span th:text="${#temporals.format(t.presentationDateTime, 'yyyy-MM-dd')}"></span>
+                                <br>
+                                <strong>Time:</strong>
+                                <span th:text="${#temporals.format(t.presentationDateTime, 'HH:mm')}"></span>
+                            </p>
+                            <p th:if="${t.presentationDateTime == null}" class="text-danger">
+                                Presentation time not set.
+                            </p>
                             <div th:each="p : ${t.programRestrictions}">
                                 <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                             </div>

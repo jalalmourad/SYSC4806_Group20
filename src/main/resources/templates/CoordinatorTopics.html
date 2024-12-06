@@ -20,10 +20,20 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Loop through topics and display each in a card -->
         <div class="col" th:each="topic : ${topics}">
-            <div class="card h-100">
+            <div class="card "> <!--h-100-->
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${topic.title}">Topic Title: </h5>
-                    <p class="card-text" th:text="${topic.description}">Topic description goes here.</p>
+                    <h5 class="card-title" th:text="|Topic Title: ${topic.title}|"></h5>
+                    <p class="card-text" th:text="|Description: ${topic.description}|"></p>
+                    <p th:if="${topic.presentationDateTime != null}">
+                        <strong>Date:</strong>
+                        <span th:text="${#temporals.format(topic.presentationDateTime, 'yyyy-MM-dd')}"></span>
+                        <br>
+                        <strong>Time:</strong>
+                        <span th:text="${#temporals.format(topic.presentationDateTime, 'HH:mm')}"></span>
+                    </p>
+                    <p th:if="${topic.presentationDateTime == null}" class="text-danger">
+                        Presentation time not set.
+                    </p>
                 </div>
                 <div class="card-footer text-center">
                     <a th:href="@{'/profprofile/viewAvailability/' + ${topic.id}}" class="btn btn-primary">View
@@ -34,4 +44,53 @@
     </div>
 </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to fetch the user role from the server
+        function fetchUserRole() {
+            return fetch("/api/navBar/getRole")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                })
+                .catch((error) => {
+                    console.error("Error fetching user role:", error);
+                    return "Guest"; // Default to "Guest" on error
+                });
+        }
+
+        // Get menu elements
+        const professorMenu = document.getElementById("professor");
+        const studentMenu = document.getElementById("student");
+        const loginMenu = document.getElementById("login");
+        const logoutMenu = document.getElementById("logout");
+
+        // Hide all menus initially
+        professorMenu.style.display = "none";
+        studentMenu.style.display = "none";
+        loginMenu.style.display = "none";
+        logoutMenu.style.display = "none";
+
+        // Fetch user role and update UI accordingly
+        fetchUserRole().then((userRole) => {
+
+            // Show/hide menus based on user role
+            if (userRole === "Student") {
+                studentMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else if (userRole === "Professor") {
+                professorMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else if (userRole === "Admin") {
+                professorMenu.style.display = "block";
+                studentMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else {
+                loginMenu.style.display = "block"; // Guest user
+            }
+        });
+    });
+</script>
 </html>

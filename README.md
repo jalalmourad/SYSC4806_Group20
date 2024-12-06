@@ -3,6 +3,7 @@
 
 ## Azure Link
 [https://sysc4806group20-d8dwhjc5evgccra8.canadaeast-01.azurewebsites.net/](https://sysc4806group20-d8dwhjc5evgccra8.canadaeast-01.azurewebsites.net/)
+<hr>
 
 ## Students
 Sami Mnif - 101199669  
@@ -10,31 +11,15 @@ Hadi Srour - 101200666
 Jalal Mourad - 101195065  
 Ibtasam Rasool - 101186050  
 Aaron Gabor - 101108064
+<hr>
 
 ## Diagrams
 
 ### UML Diagram
-![UML Diagram](/README_imgs/SYSC4806_Group20UML2.png)
+![UML Diagram](/README_imgs/SYSC4806_Group20_UML3.png)
 
 ### Database Schema
 ![UML Diagram](/README_imgs/Database_Schema.png)
-
-## Log
-| Milestone      | 1   | 2  |
-|----------------|-----|----|
-| Sami Mnif      |     |    |
-| Hadi Srour     |     |    |
-| Jalal Mourad   |     |    |
-| Ibtasam Rasool |     |    |
-| Aaron Gabor    |     |    |
-
-## Updates
-![Registration](/README_imgs/registration.png)
-![New Topic Creation](/README_imgs/newTopic.png)
-![Professor profile](/README_imgs/professorProfile.png)
-![Topic List](/README_imgs/topicList.png)
-![Student Num](/README_imgs/ChangesForStudentNum.PNG)
-![Enroll Student](/README_imgs/ChangesForAddingStudent.PNG)
 
 ## Project Dir
 ```
@@ -57,6 +42,7 @@ Aaron Gabor - 101108064
 │   │   │   └───org
 │   │   │       └───sysc4806
 │   │   │           └───sysc4806_group20
+│   │   │               ├───Config
 │   │   │               ├───Controller
 │   │   │               ├───Model
 │   │   │               ├───Repository
@@ -64,27 +50,39 @@ Aaron Gabor - 101108064
 │   │   └───resources
 │   │       ├───static
 │   │       │   ├───css
+│   │       │   ├───html
 │   │       │   └───js
 │   │       └───templates
+│   │           └───common
 │   └───test
 │       └───java
 │           └───org
 │               └───sysc4806
 │                   └───sysc4806_group20
-└───target
-    ├───classes
-    │   ├───org
-    │   │   └───sysc4806
-    │   │       └───sysc4806_group20
-    │   │           ├───Controller
-    │   │           ├───Model
-    │   │           ├───Repository
-    │   │           └───Service
-    │   ├───static
-    │   │   ├───css
-    │   │   └───js
-    │   └───templates
-    └───generated-sources
-        └───annotations
+├───target
+│   ├───classes
+│   │   ├───org
+│   │   │   └───sysc4806
+│   │   │       └───sysc4806_group20
+│   │   │           ├───Config
+│   │   │           ├───Controller
+│   │   │           ├───Model
+│   │   │           ├───Repository
+│   │   │           └───Service
+│   │   ├───static
+│   │   │   ├───css
+│   │   │   ├───html
+│   │   │   └───js
+│   │   └───templates
+│   │       └───common
+│   ├───generated-sources
+│   │   └───annotations
+│   ├───generated-test-sources
+│   │   └───test-annotations
+│   └───test-classes
+│       └───org
+│           └───sysc4806
+│               └───sysc4806_group20
+└───uploads
 
 ```

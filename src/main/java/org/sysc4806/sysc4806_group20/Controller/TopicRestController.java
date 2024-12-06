@@ -2,6 +2,10 @@ package org.sysc4806.sysc4806_group20.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import org.sysc4806.sysc4806_group20.Model.Professor;
@@ -39,6 +43,18 @@ public class TopicRestController {
         professorService.save(profreturn);
         System.out.println("New Topic Created");
         return topicAdded;
+    }
+
+    @PostMapping("/editTopic")
+    public ResponseEntity<?> editTopic(@RequestBody Topic topicRequest, HttpSession session){
+        long id = (long) session.getAttribute("userSpecialId");
+        System.out.println("Session Special ID: " + id);
+
+        Topic topicAdded = topicService.save(topicRequest);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", "/profprofile");
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 
     //For Testing Only

@@ -85,6 +85,22 @@ public class ViewController {
         else return "login";
     }
 
+    @GetMapping("/editTopic/{id}")
+    public String editTopic(@PathVariable("id") Long topicId, Model model, HttpSession session){
+        if(session.getAttribute("userRole") == null) {return "login";}
+        if(session.getAttribute("userRole").equals("ROLE_PROFESSOR") || session.getAttribute("userRole").equals("ROLE_ADMIN")) {
+            long id = (long) session.getAttribute("userSpecialId");
+            Topic topic = topicService.findById(topicId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Topic not found with id " + topicId));
+            model.addAttribute("topic", topic);
+            model.addAttribute("status", new ArrayList<>(EnumSet.allOf(Status.class)));
+            model.addAttribute("programs", new ArrayList<>(EnumSet.allOf(ProgramRestrictions.class)));
+            model.addAttribute("profId", id);
+            return "editTopic";
+        }
+        else return "login";
+    }
+
     /**
      * For Testing
      */

@@ -54,10 +54,26 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${student.joinedTopic.title}"></h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-secondary"
-                                                                                     th:text="${student.joinedTopic.status}"></span>
+                            <h5 th:text="|Size: ${student.joinedTopic.students.size()}/${student.joinedTopic.numberOfStudents}|"></h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">
+                                <span class="badge" th:text="${student.joinedTopic.status}"
+                                      th:classappend="${#strings.trim(student.joinedTopic.status) == 'OPEN'} ? 'text-bg-success' : (${#strings.trim(student.joinedTopic.status) == 'FULL'} ? 'text-bg-danger' : 'text-bg-secondary')">
+                                </span>
+                                <!--<span class="badge text-bg-secondary" th:text="${student.joinedTopic.status}"></span>-->
                             </h6>
-                            <p class="card-text" th:text="${student.joinedTopic.description}"></p>
+                            <h6>Description:</h6>
+                            <p class="card-text" th:text="|${student.joinedTopic.description}|"></p>
+                            <h6>Presentation Time:</h6>
+                            <p th:if="${student.joinedTopic.presentationDateTime != null}">
+                                <strong>Date:</strong>
+                                <span th:text="${#temporals.format(student.joinedTopic.presentationDateTime, 'yyyy-MM-dd')}"></span>
+                                <br>
+                                <strong>Time:</strong>
+                                <span th:text="${#temporals.format(student.joinedTopic.presentationDateTime, 'HH:mm')}"></span>
+                            </p>
+                            <p th:if="${student.joinedTopic.presentationDateTime == null}" class="text-danger">
+                                Presentation time not set.
+                            </p>
                             <div th:each="p : ${student.joinedTopic.programRestrictions}">
                                 <span class="badge text-bg-primary" th:text="|${p} Engineering|"></span>
                             </div>

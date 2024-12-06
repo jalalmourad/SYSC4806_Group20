@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import org.sysc4806.sysc4806_group20.Model.*;
 
 import org.sysc4806.sysc4806_group20.Model.Professor;
@@ -252,5 +251,46 @@ public class ViewController {
         return "Submissions";
     }
 
+    @GetMapping("/profprofile/viewAvailability/{topic}")
+    public String viewAvailability(@PathVariable Long topic, Model model, HttpSession session){
+        if(session.getAttribute("userRole") == null) {return "login";}
+        if(session.getAttribute("userRole").equals("ROLE_PROFESSOR")) {
+            long pId = (long) session.getAttribute("userSpecialId");
+            Topic topic1 = topicService.findById(topic).orElseThrow(() -> new ResourceNotFoundException
+                    ("No Topic found with id" + topic));
+
+            // Collect availability data
+            Map<String, Map<String, String>> professorAvailability = new HashMap<>();
+            professorAvailability.put(topic1.getProf().toString(), topic1.getProf().getAvailability());
+
+            Map<String, Map<String, String>> studentAvailability = new HashMap<>();
+            for (Student student : topic1.getStudents()) {
+                studentAvailability.put(student.toString(), student.getAvailability());
+            }
+
+            // Pass the data to the frontend
+            model.addAttribute("topic", topic);
+            model.addAttribute("professorAvailability", professorAvailability);
+            model.addAttribute("studentAvailability", studentAvailability);
+
+            return "TopicAvailability";
+        }
+        else return "login";
+    }
+
+    @GetMapping("/profprofile/viewAllTopics")
+    public String viewAllTopics(Model model, HttpSession session){
+        if(session.getAttribute("userRole") == null) {return "login";}
+        if(session.getAttribute("userRole").equals("ROLE_PROFESSOR")) {
+            long pId = (long) session.getAttribute("userSpecialId");
+            Iterable<Topic> topics = topicService.findAll();
+
+            // Pass the data to the frontend
+            model.addAttribute("topics", topics);
+
+            return "CoordinatorTopics";
+        }
+        else return "login";
+    }
 
 }

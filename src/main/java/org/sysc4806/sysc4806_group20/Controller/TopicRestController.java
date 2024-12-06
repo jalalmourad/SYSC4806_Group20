@@ -2,6 +2,7 @@ package org.sysc4806.sysc4806_group20.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import org.sysc4806.sysc4806_group20.Model.Professor;
@@ -10,6 +11,14 @@ import org.sysc4806.sysc4806_group20.Model.Topic;
 import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
 import org.sysc4806.sysc4806_group20.Service.TopicService;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/topics")
@@ -81,5 +90,30 @@ public class TopicRestController {
         topicService.deleteById(id);
         return id;
     }
+
+    @PostMapping("/schedulePresentation")
+    public RedirectView schedulePresentation(
+            @RequestParam Long topicId,
+            @RequestParam String presentationDate,
+            @RequestParam String presentationTime) {
+        // Find the topic by ID
+        Topic topic = topicService.findById(topicId)
+                .orElseThrow(() -> new ResourceNotFoundException("Topic not found with ID " + topicId));
+
+        // Combine the date and time into a LocalDateTime object
+        LocalDateTime presentationDateTime = LocalDateTime.of(
+                LocalDate.parse(presentationDate),
+                LocalTime.parse(presentationTime)
+        );
+
+        // Set the presentation date and time for the topic
+        topic.setPresentationDateTime(presentationDateTime);
+        topicService.save(topic); // Save the updated topic
+
+
+        // Redirect to a confirmation or topics page
+        return new RedirectView("/listTopics/"+topicId);
+    }
+
 
 }

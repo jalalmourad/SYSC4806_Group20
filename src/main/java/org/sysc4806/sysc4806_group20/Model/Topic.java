@@ -2,6 +2,7 @@ package org.sysc4806.sysc4806_group20.Model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class Topic {
 
     @ManyToOne
     private Professor prof;
+
+    private LocalDateTime presentationDateTime;
 
     public Topic() {}
 
@@ -102,8 +105,16 @@ public class Topic {
     }
 
     public void addStudent(Student student) {
-        students.add(student);
-        numberOfStudents++;
+        if (students.size() < numberOfStudents){
+            students.add(student);
+            //numberOfStudents++;
+        }
+        if (students.size() >= numberOfStudents){
+            status = Status.FULL;
+        }
+        else {
+            status = Status.OPEN;
+        }
     }
 
     @Override
@@ -118,5 +129,13 @@ public class Topic {
                 ", students=" + students +
                 ", prof=" + prof +
                 '}';
+    }
+
+    public LocalDateTime getPresentationDateTime() {
+        return presentationDateTime;
+    }
+
+    public void setPresentationDateTime(LocalDateTime presentationDateTime) {
+        this.presentationDateTime = presentationDateTime;
     }
 }

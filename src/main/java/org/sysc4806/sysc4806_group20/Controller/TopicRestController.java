@@ -57,7 +57,9 @@ public class TopicRestController {
     public ResponseEntity<?> editTopic(@RequestBody Topic topicRequest, HttpSession session){
         long id = (long) session.getAttribute("userSpecialId");
         System.out.println("Session Special ID: " + id);
-
+        Professor prof = professorService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Professor not found with id " + id));
+        topicRequest.setProf(prof);
         Topic topicAdded = topicService.save(topicRequest);
 
         HttpHeaders headers = new HttpHeaders();

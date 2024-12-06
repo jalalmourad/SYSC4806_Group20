@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Availability</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<div th:replace="common/navbar :: common-navbar"/>
+<div class="container mt-5">
+    <h2>Availability for Topic: <span th:text="${topic}"></span></h2>
+
+    <h3>Professors</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${professorAvailability}">
+            <td th:text="${entry.key}"></td>
+            <td th:text="${entry.value['Monday']}"></td>
+            <td th:text="${entry.value['Tuesday']}"></td>
+            <td th:text="${entry.value['Wednesday']}"></td>
+            <td th:text="${entry.value['Thursday']}"></td>
+            <td th:text="${entry.value['Friday']}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Students</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${studentAvailability}">
+            <td th:text="${entry.key}"></td>
+            <td th:text="${entry.value['Monday']}"></td>
+            <td th:text="${entry.value['Tuesday']}"></td>
+            <td th:text="${entry.value['Wednesday']}"></td>
+            <td th:text="${entry.value['Thursday']}"></td>
+            <td th:text="${entry.value['Friday']}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

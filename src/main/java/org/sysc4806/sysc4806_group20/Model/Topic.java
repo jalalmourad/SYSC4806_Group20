@@ -102,8 +102,16 @@ public class Topic {
     }
 
     public void addStudent(Student student) {
-        students.add(student);
-        numberOfStudents++;
+        if (students.size() < numberOfStudents){
+            students.add(student);
+            //numberOfStudents++;
+        }
+        if (students.size() >= numberOfStudents){
+            status = Status.FULL;
+        }
+        else {
+            status = Status.OPEN;
+        }
     }
 
     @Override

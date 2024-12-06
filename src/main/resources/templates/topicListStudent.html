@@ -37,7 +37,7 @@
             <td th:text="${t.numberOfStudents}"></td>
             <td>
                 <div class="col-12">
-                    <button type="button" class="btn btn-primary join-button" th:value="${t.id}" th:disabled="${student.hasTopic}"> Join </button>
+                    <button type="button" class="btn btn-primary join-button" th:value="${t.id}" th:disabled="${student.hasTopic or #strings.trim(t.status) == 'FULL'}"> Join </button>
                 </div>
             </td>
         </tr>

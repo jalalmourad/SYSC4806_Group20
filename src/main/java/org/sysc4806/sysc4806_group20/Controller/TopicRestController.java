@@ -2,6 +2,7 @@ package org.sysc4806.sysc4806_group20.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import org.sysc4806.sysc4806_group20.Model.Professor;
@@ -10,6 +11,11 @@ import org.sysc4806.sysc4806_group20.Model.Topic;
 import org.sysc4806.sysc4806_group20.Service.ProfessorService;
 import org.sysc4806.sysc4806_group20.Service.StudentService;
 import org.sysc4806.sysc4806_group20.Service.TopicService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/topics")

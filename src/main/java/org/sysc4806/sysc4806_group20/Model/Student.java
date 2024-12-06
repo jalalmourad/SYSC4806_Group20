@@ -44,7 +44,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Name: " + firstName + " " + lastName + " ID: " + studentID;
+        return "Name: " + firstName + " " + lastName + ", ID: " + studentID;
     }
 
     public Long getId() {
